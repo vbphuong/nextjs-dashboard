@@ -1,9 +1,10 @@
 module.exports = {
   hooks: {
-    readPackageJson(pkg) {
+    readPackage(pkg) {
       if (pkg.name === 'bcrypt') {
-        pkg.scripts = pkg.scripts || {};
-        pkg.scripts.preinstall = 'npm rebuild bcrypt || true';
+        pkg.dependencies = pkg.dependencies || {};
+        // Ensure no conflicting versions
+        delete pkg.dependencies['bcrypt'];
       }
       return pkg;
     },
