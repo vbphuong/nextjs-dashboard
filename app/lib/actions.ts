@@ -88,6 +88,7 @@ export async function updateInvoice(
   const { customerId, amount, status } = validatedFields.data;
   const amountInCents = amount * 100;
  
+
     await sql`
       UPDATE invoices
       SET customer_id = ${customerId}, amount = ${amountInCents}, status = ${status}
