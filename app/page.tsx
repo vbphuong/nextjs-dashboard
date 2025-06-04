@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { ArrowRightIcon } from '@heroicons/react/20/solid';
 
-export default function Home() {
+export default function Page() {
   return (
     <div
       className="relative min-h-screen bg-gradient-to-b from-blue-900 to-black text-white flex flex-col items-center justify-center p-6"
@@ -13,11 +13,16 @@ export default function Home() {
     >
       {/* Title */}
       <h1 className="text-4xl md:text-5xl font-bold text-center mb-8">
-        The World’s Leading AI-Powered <br />
-        <span className="text-orange-500">Digital Data Company</span>
+        The World’s Leading AI-Powered{' '}
+        <span
+          className="bg-gradient-to-r from-orange-500 via-purple-500 to-blue-500 bg-clip-text text-transparent"
+        >
+          Digital Data
+        </span>{' '}
+        Company
       </h1>
 
-      {/* Replace Search Bar with Orange Log In Button */}
+      {/* Log In Button */}
       <div className="flex justify-center mb-12">
         <Link
           href="/login"
@@ -28,50 +33,47 @@ export default function Home() {
         </Link>
       </div>
 
-      {/* Dashboard Cards (Static Mockup) */}
-      <div className="relative w-full max-w-5xl flex justify-center items-center">
-        {/* Card 1 - Website Performance */}
-        <div className="absolute -left-20 top-0 bg-white/90 rounded-lg shadow-lg p-4 w-64 transform -rotate-6">
-          <h3 className="text-gray-800 font-semibold">Website Performance</h3>
-          <div className="text-gray-600 mt-2">
-            <p>Organic Search: 95.26M</p>
-            <p>Paid Search: 6.24M</p>
-          </div>
-        </div>
+      {/* Images */}
+      <div className="relative w-full max-w-5xl flex justify-center items-center space-x-4">
+        {/* Image 1 */}
+        <img
+          src="/introduce1.png"
+          alt="Introduce 1"
+          className="w-64 h-96 object-cover rounded-lg shadow-lg transform -rotate-6"
+          style={{ opacity: 1.0 }}
+        />
 
-        {/* Card 2 - Main Dashboard */}
-        <div className="relative bg-white/95 rounded-lg shadow-lg p-6 w-full max-w-2xl z-10">
-          <h2 className="text-gray-800 font-semibold text-lg mb-4">nike.com</h2>
-          <div className="grid grid-cols-2 gap-4">
-            <div>
-              <h3 className="text-gray-600">Traffic & Engagement</h3>
-              <p className="text-gray-800 font-semibold">39.2M</p>
-            </div>
-            <div>
-              <h3 className="text-gray-600">Device Distribution</h3>
-              <p className="text-gray-800">Desktop: 32.5%</p>
-              <p className="text-gray-800">Mobile Web: 75.1%</p>
-            </div>
-            <div>
-              <h3 className="text-gray-600">Global Rank</h3>
-              <p className="text-gray-800 font-semibold">#244</p>
-            </div>
-            <div>
-              <h3 className="text-gray-600">Industry Rank</h3>
-              <p className="text-gray-800 font-semibold">#3</p>
-            </div>
-          </div>
-        </div>
+        {/* Image 2 */}
+        <img
+          src="/introduce2.png"
+          alt="Introduce 2"
+          className="w-64 h-96 object-cover rounded-lg shadow-lg"
+          style={{ opacity: 0.9 }}
+        />
 
-        {/* Card 3 - Top Countries */}
-        <div className="absolute -right-20 top-0 bg-white/90 rounded-lg shadow-lg p-4 w-64 transform rotate-6">
-          <h3 className="text-gray-800 font-semibold">Top Countries</h3>
-          <div className="text-gray-600 mt-2">
-            <p>United States: 32.5%</p>
-            <p>India: 12.4%</p>
-            <p>Germany: 8.7%</p>
-          </div>
-        </div>
+        {/* Image 3 */}
+        <img
+          src="/introduce3.png"
+          alt="Introduce 3"
+          className="w-64 h-96 object-cover rounded-lg shadow-lg transform rotate-6"
+          style={{ opacity: 0.8 }}
+        />
+
+        {/* Image 4 */}
+        <img
+          src="/introduce4.png"
+          alt="Introduce 4"
+          className="w-64 h-96 object-cover rounded-lg shadow-lg transform -rotate-3"
+          style={{ opacity: 0.7 }}
+        />
+
+        {/* Image 5 */}
+        <img
+          src="/introduce5.png"
+          alt="Introduce 5"
+          className="w-64 h-96 object-cover rounded-lg shadow-lg transform rotate-3"
+          style={{ opacity: 0.6 }}
+        />
       </div>
     </div>
   );
