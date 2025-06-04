@@ -10,7 +10,7 @@ import clsx from 'clsx';
 // Depending on the size of the application, this would be stored in a database.
 
 const links = [
-   { name: 'Home', href: '/home', icon: HomeIcon },
+   { name: 'Home', href: '/dashboard/home', icon: HomeIcon },
    { name: 'Customer', href: '/dashboard', icon: UserIcon }, // Represents a person or user
    { name: 'Product', href: '/dashboard/product', icon: CubeIcon }, // Represents a product or item
    { name: 'Market', href: '/dashboard/market', icon: ChartBarIcon }, // Represents analytics or market trends
