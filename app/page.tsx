@@ -1,53 +1,78 @@
-import AcmeLogo from '@/app/ui/acme-logo';
-import { ArrowRightIcon } from '@heroicons/react/24/outline';
-import Link from 'next/link';
-import styles from '@/app/ui/home.module.css';
-import { lusitana } from '@/app/ui/fonts';
-import Image from 'next/image'; 
+'use client';
 
-export default function Page() {
+import Link from 'next/link';
+import { ArrowRightIcon } from '@heroicons/react/20/solid';
+
+export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col p-6">
-      <div className="flex h-20 shrink-0 items-end rounded-lg bg-blue-500 p-4 md:h-52">
-        {<AcmeLogo />}
+    <div
+      className="relative min-h-screen bg-gradient-to-b from-blue-900 to-black text-white flex flex-col items-center justify-center p-6"
+      style={{
+        backgroundImage: 'linear-gradient(180deg, #1e3a8a 0%, #000000 100%)',
+      }}
+    >
+      {/* Title */}
+      <h1 className="text-4xl md:text-5xl font-bold text-center mb-8">
+        The World’s Leading AI-Powered <br />
+        <span className="text-orange-500">Digital Data Company</span>
+      </h1>
+
+      {/* Replace Search Bar with Orange Log In Button */}
+      <div className="flex justify-center mb-12">
+        <Link
+          href="/login"
+          className="flex items-center bg-orange-500 text-white font-semibold py-3 px-6 rounded-full hover:bg-orange-600 transition-colors"
+        >
+          <span>Log in</span>
+          <ArrowRightIcon className="w-5 md:w-6 ml-2" />
+        </Link>
       </div>
-      <div className="mt-4 flex grow flex-col gap-4 md:flex-row">
-        <div className="flex flex-col justify-center gap-6 rounded-lg bg-gray-50 px-6 py-10 md:w-2/5 md:px-20">
-          <div
-            className={styles.shape}
-          />
-          <p className={`${lusitana.className} text-xl text-gray-800 md:text-3xl md:leading-normal`}>
-            <strong>Welcome to Acme.</strong> This is the example for the{' '}
-            <a href="https://nextjs.org/learn/" className="text-blue-500">
-              Next.js Learn Course
-            </a>
-            , brought to you by Vercel.
-          </p>
-          <Link
-            href="/login"
-            className="flex items-center gap-5 self-start rounded-lg bg-blue-500 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-blue-400 md:text-base"
-          >
-            <span>Log in</span> <ArrowRightIcon className="w-5 md:w-6" />
-          </Link>
+
+      {/* Dashboard Cards (Static Mockup) */}
+      <div className="relative w-full max-w-5xl flex justify-center items-center">
+        {/* Card 1 - Website Performance */}
+        <div className="absolute -left-20 top-0 bg-white/90 rounded-lg shadow-lg p-4 w-64 transform -rotate-6">
+          <h3 className="text-gray-800 font-semibold">Website Performance</h3>
+          <div className="text-gray-600 mt-2">
+            <p>Organic Search: 95.26M</p>
+            <p>Paid Search: 6.24M</p>
+          </div>
         </div>
-        <div className="flex items-center justify-center p-6 md:w-3/5 md:px-28 md:py-12">
-          {/* Add Hero Images Here */}
-          <Image
-            src="/hero-desktop.png"
-            width={1000}
-            height={760}
-            className="hidden md:block"
-            alt="Screenshots of the dashboard project showing desktop version"
-          />
-          <Image
-            src="/hero-mobile.png"
-            width={560}
-            height={620}
-            className="block md:hidden"
-            alt="Screenshot of the dashboard project showing mobile version"
-          />
+
+        {/* Card 2 - Main Dashboard */}
+        <div className="relative bg-white/95 rounded-lg shadow-lg p-6 w-full max-w-2xl z-10">
+          <h2 className="text-gray-800 font-semibold text-lg mb-4">nike.com</h2>
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <h3 className="text-gray-600">Traffic & Engagement</h3>
+              <p className="text-gray-800 font-semibold">39.2M</p>
+            </div>
+            <div>
+              <h3 className="text-gray-600">Device Distribution</h3>
+              <p className="text-gray-800">Desktop: 32.5%</p>
+              <p className="text-gray-800">Mobile Web: 75.1%</p>
+            </div>
+            <div>
+              <h3 className="text-gray-600">Global Rank</h3>
+              <p className="text-gray-800 font-semibold">#244</p>
+            </div>
+            <div>
+              <h3 className="text-gray-600">Industry Rank</h3>
+              <p className="text-gray-800 font-semibold">#3</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Card 3 - Top Countries */}
+        <div className="absolute -right-20 top-0 bg-white/90 rounded-lg shadow-lg p-4 w-64 transform rotate-6">
+          <h3 className="text-gray-800 font-semibold">Top Countries</h3>
+          <div className="text-gray-600 mt-2">
+            <p>United States: 32.5%</p>
+            <p>India: 12.4%</p>
+            <p>Germany: 8.7%</p>
+          </div>
         </div>
       </div>
-    </main>
+    </div>
   );
 }
