@@ -179,3 +179,8 @@ input[type='number']::-webkit-outer-spin-button {
 .animate-grow {
   animation: grow 0.8s ease-out forwards;
 }
+
+.bar {
+  height: 0;
+  animation: grow 0.8s ease-out forwards;
+}
