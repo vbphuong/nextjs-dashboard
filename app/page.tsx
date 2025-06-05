@@ -74,7 +74,6 @@ export default function Home() {
 
     // Tính toán màu nền dựa trên scrollProgress
     const startColor = "rgba(30, 58, 138, 1)"; // #1e3a8a (blue-900)
-    const midColor = "rgba(59, 130, 246, 1)"; // #3b82f6 (blue-500, sáng hơn)
     const endColor = "rgba(255, 255, 255, 1)"; // #ffffff (white)
     const blackColor = "rgba(0, 0, 0, 1)"; // #000000 (black)
   
