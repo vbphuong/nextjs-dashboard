@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const provinces = [
   { name: 'Long An', score: 65 },
@@ -21,21 +21,32 @@ export default function AttitudeChart() {
   const maxScore = 100;
   const [hoveredProvince, setHoveredProvince] = useState<{ name: string; score: number } | null>(null);
 
+  useEffect(() => {
+    const bars = document.querySelectorAll('.bar');
+    bars.forEach((bar, index) => {
+      const el = bar as HTMLElement; // Ép kiểu rõ ràng
+      el.classList.add('animate-grow');
+      el.style.animationDelay = `${index * 0.1}s`;
+    });
+  }, []);
+  
+
   return (
-    <div className="bg-gray-900/90 backdrop-blur-md text-white animate-fadeIn border-none shadow-[0_0_15px_rgba(0,0,0,0.5)] p-6 rounded-lg">
-      <h3 className="text-lg md:text-xl font-semibold tracking-wide">
+    <div className="bg-gray-900/90 backdrop-blur-md text-white p-6 rounded-lg relative overflow-hidden" style={{ minHeight: '400px' }}>
+      <h3 className="text-lg md:text-xl font-semibold tracking-wide z-10 relative">
         Attitude Score (Positive/Negative) in Mekong Delta Provinces
       </h3>
-      <div className="relative flex flex-col space-y-4 mt-4">
+      <div className="absolute inset-0 bg-black opacity-70"></div>
+      <div className="relative z-10 flex flex-col space-y-4 mt-4">
         <div className="absolute left-0 top-0 h-[300px] md:h-[400px] flex flex-col justify-between text-sm text-gray-400">
           {[100, 80, 60, 40, 20, 0].map((value) => (
             <div key={value} className="relative flex items-center w-full">
-              <span className="absolute -left-8">{value}</span>
-              <div className="w-full h-px bg-gray-700/50"></div>
+              <span className="absolute -left-8 z-10">{value}</span>
+              <div className="w-full h-px bg-gray-700/50 z-10"></div>
             </div>
           ))}
         </div>
-        <div className="flex-1 flex justify-around items-end pl-10 h-[300px] md:h-[400px]">
+        <div className="flex-1 flex justify-around items-end pl-10 h-[300px] md:h-[400px] relative z-10">
           {provinces.map((province, index) => (
             <div
               key={province.name}
@@ -44,23 +55,20 @@ export default function AttitudeChart() {
               onMouseLeave={() => setHoveredProvince(null)}
             >
               <div
-                className="bg-gradient-to-t from-blue-600 to-cyan-400 rounded-t-lg w-full transition-all duration-500 hover:from-blue-500 hover:to-cyan-300 hover:shadow-[0_0_15px_rgba(34,211,238,0.6)]"
+                className="bar bg-gradient-to-t from-yellow-600 to-yellow-300 rounded-t-lg w-full transition-all duration-500 hover:from-yellow-500 hover:to-yellow-200 hover:shadow-[0_0_15px_rgba(234,179,8,0.6)]"
                 style={{
                   height: `${(province.score / maxScore) * 100}%`,
-                  animation: `growBar 0.8s ease-out ${index * 0.1}s forwards`,
-                  transformOrigin: 'bottom',
-                  transform: 'scaleY(0)',
                 }}
               />
               {hoveredProvince?.name === province.name && (
-                <div className="absolute -top-8 bg-gray-800 text-white text-xs rounded-md px-2 py-1 shadow-lg">
+                <div className="absolute -top-8 bg-gray-800 text-white text-xs rounded-md px-2 py-1 shadow-lg z-20">
                   {province.score}
                 </div>
               )}
             </div>
           ))}
         </div>
-        <div className="flex justify-around pl-10 text-sm text-gray-300">
+        <div className="flex justify-around pl-10 text-sm text-gray-300 z-10">
           {provinces.map((province) => (
             <span
               key={province.name}
@@ -72,6 +80,11 @@ export default function AttitudeChart() {
           ))}
         </div>
       </div>
+      <div className="absolute inset-0 z-0" style={{
+        background: 'linear-gradient(135deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.2) 100%), url(/main-background.png)',
+        backgroundSize: 'cover',
+        clipPath: 'polygon(0 0, 100% 0, 100% 80%, 0 100%)',
+      }}></div>
     </div>
   );
 }
