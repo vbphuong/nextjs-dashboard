@@ -105,7 +105,7 @@ export default function AttitudeChart() {
           </svg>
         </div>
 
-        <div className="absolute bottom-0 left-0 w-full pl-16 pb-2">
+        <div className="absolute bottom-0 left-0 w-full pl-16 pb-8">
           <div className="flex justify-between text-sm text-gray-300 z-10">
             {provinces.map((province) => (
               <span
