@@ -60,7 +60,7 @@ export default function Home() {
 
       {/* Title (2 Lines) */}
       <h1 className="text-4xl md:text-5xl font-bold text-center mb-8">
-        HopeThatIWillPass team <br />
+        HopeThatIWillPass team&#39; <br />
         <span
           className="bg-gradient-to-r from-orange-500 via-purple-500 to-blue-500 bg-clip-text text-transparent"
         >
@@ -189,7 +189,7 @@ export default function Home() {
               />
               <h3 className="text-xl font-semibold text-blue-300">AI Expert</h3>
               <p className="text-gray-300 mt-2">
-                An AI expert for every area of your business. Put Similarweb's digital insights to work in a click with our AI-powered experts.
+                An AI expert for every area of your business. Put Similarweb&#39;s digital insights to work in a click with our AI-powered experts.
               </p>
               <button className="mt-4 bg-cyan-500 text-white py-2 px-4 rounded-full hover:bg-cyan-600">
                 Book a demo
