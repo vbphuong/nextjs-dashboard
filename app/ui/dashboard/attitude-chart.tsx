@@ -45,7 +45,7 @@ export default function AttitudeChart() {
       </div>
 
       {/* Chart Content */}
-      <div className="relative z-10 flex flex-col space-y-6">
+      <div className="relative z-10 flex flex-col h-full">
         {/* Y-Axis Labels and Grid Lines */}
         <div className="absolute left-0 top-0 h-[300px] md:h-[350px] flex flex-col justify-between text-sm text-gray-400 pr-4">
           {[100, 80, 60, 40, 20, 0].map((value) => (
@@ -57,7 +57,7 @@ export default function AttitudeChart() {
         </div>
 
         {/* Bars */}
-        <div className="flex-1 flex justify-between items-end pl-16 h-[300px] md:h-[350px] relative z-10">
+        <div className="flex-1 flex justify-between pl-16 h-[300px] md:h-[350px] relative z-10">
           {provinces.map((province, index) => (
             <div
               key={province.name}
@@ -84,16 +84,18 @@ export default function AttitudeChart() {
           ))}
         </div>
 
-        {/* X-Axis Labels */}
-        <div className="flex justify-between pl-16 text-sm text-gray-300 z-10">
-          {provinces.map((province) => (
-            <span
-              key={province.name}
-              className="text-center w-10 md:w-14 truncate"
-            >
-              {province.name}
-            </span>
-          ))}
+        {/* X-Axis Labels - Fixed at Bottom */}
+        <div className="absolute bottom-0 left-0 w-full pl-16 pb-2">
+          <div className="flex justify-between text-sm text-gray-300 z-10">
+            {provinces.map((province) => (
+              <span
+                key={province.name}
+                className="text-center w-10 md:w-14 truncate"
+              >
+                {province.name}
+              </span>
+            ))}
+          </div>
         </div>
       </div>
     </div>
