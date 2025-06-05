@@ -64,7 +64,7 @@ export default function AttitudeChart() {
                 <g key={province.name}>
                   <rect
                     x={`${xPosition}%`}
-                    y={`${100 - barHeight}%`}
+                    y={`${120 - barHeight}%`}
                     width={`${barActualWidth}%`}
                     height={`${barHeight}%`}
                     fill="url(#barGradient)"
@@ -105,7 +105,7 @@ export default function AttitudeChart() {
           </svg>
         </div>
 
-        <div className="absolute bottom-0 left-0 w-full pl-16 pb-8">
+        <div className="absolute bottom-0 left-0 w-full pl-16 pt-8">
           <div className="flex justify-between text-sm text-gray-300 z-10">
             {provinces.map((province) => (
               <span
