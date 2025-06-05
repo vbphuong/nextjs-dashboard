@@ -123,7 +123,7 @@ export default function Home() {
         {/* Log In Button */}
         <div className="flex justify-center mb-12">
           <Link
-            href="/login"
+            href="https://nextjs-dashboard-chi-eight-10.vercel.app/login?callbackUrl=https%3A%2F%2Fnextjs-dashboard-chi-eight-10.vercel.app%2Fdashboard"
             className="flex items-center bg-orange-500 text-white font-semibold py-3 px-6 rounded-full hover:bg-orange-600 transition-colors"
           >
             <span>Get Started</span>
