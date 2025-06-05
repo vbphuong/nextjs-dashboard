@@ -1,41 +1,36 @@
 'use client';
 
-import { SunIcon, UserIcon, CubeIcon, ChartBarIcon, TruckIcon, } from '@heroicons/react/24/outline';
-
+import { SunIcon, UserIcon, CubeIcon, ChartBarIcon, TruckIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import clsx from 'clsx';
 
-// Map of links to display in the side navigation.
-// Depending on the size of the application, this would be stored in a database.
-
 const links = [
-   { name: 'Customer', href: '/dashboard', icon: UserIcon }, // Represents a person or user
-   { name: 'Product', href: '/dashboard/product', icon: CubeIcon }, // Represents a product or item
-   { name: 'Environment', href: '/dashboard/environment', icon: SunIcon }, 
-   { name: 'Market', href: '/dashboard/market', icon: ChartBarIcon }, // Represents analytics or market trends
-   { name: 'Supply Chain', href: '/dashboard/supply_chain', icon: TruckIcon }, // Represents logistics or delivery
-  ];
-  
+  { name: 'Customer', href: '/dashboard', icon: UserIcon },
+  { name: 'Product', href: '/dashboard/product', icon: CubeIcon },
+  { name: 'Environment', href: '/dashboard/environment', icon: SunIcon },
+  { name: 'Market', href: '/dashboard/market', icon: ChartBarIcon },
+  { name: 'Supply Chain', href: '/dashboard/supply_chain', icon:TruckIcon },
+];
 
 export default function NavLinks() {
   const pathname = usePathname();
   return (
     <>
-      {links.map((link) => { 
+      {links.map((link) => {
         const LinkIcon = link.icon;
         return (
           <Link
             key={link.name}
             href={link.href}
             className={clsx(
-              'flex h-[48px] grow items-center justify-center gap-2 rounded-md bg-gray-50 p-3 text-sm font-medium hover:bg-sky-100 hover:text-blue-600 md:flex-none md:justify-start md:p-2 md:px-3',
+              'flex h-[48px] grow items-center justify-center gap-2 rounded-md bg-gray-900/50 p-3 text-sm font-medium text-white hover:bg-blue-700 hover:text-white md:flex-none md:justify-start md:p-2 md:px-3',
               {
-                'bg-sky-100 text-blue-600': pathname === link.href,
+                'bg-blue-700 text-white': pathname === link.href,
               },
             )}
           >
-            <LinkIcon className="w-6" />
+            <LinkIcon className="w-6 text-white" />
             <p className="hidden md:block">{link.name}</p>
           </Link>
         );
