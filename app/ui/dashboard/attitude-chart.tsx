@@ -66,11 +66,13 @@ export default function AttitudeChart() {
               onMouseLeave={() => setHoveredProvince(null)}
             >
               <div
-                className="bg-gradient-to-t from-yellow-600 to-yellow-300 rounded-t-lg w-full transition-all duration-500 hover:from-yellow-500 hover:to-yellow-200 hover:shadow-[0_0_15px_rgba(234,179,8,0.6)]"
+                className="bg-gradient-to-t from-yellow-600 to-yellow-300 rounded-t-lg w-full"
                 style={{
-                  height: `${(province.score / maxScore) * 100}%`,
-                  animation: `grow 0.8s ease-out ${index * 0.1}s forwards`,
+                  animation: `grow ${0.8 + index * 0.1}s ease-out forwards`,
+                  animationDelay: `${index * 0.1}s`,
                   transformOrigin: 'bottom',
+                  transition: 'all 0.5s',
+                  height: `${(province.score / maxScore) * 100}%`,
                 }}
               />
               {hoveredProvince?.name === province.name && (
