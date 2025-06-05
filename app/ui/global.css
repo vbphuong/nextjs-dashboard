@@ -165,10 +165,10 @@ input[type='number']::-webkit-outer-spin-button {
 
 @keyframes grow {
   from {
-    height: 0;
+    transform: scaleY(0);
   }
   to {
-    height: var(--target-height);
+    transform: scaleY(1);
   }
 }
 
@@ -177,10 +177,6 @@ input[type='number']::-webkit-outer-spin-button {
 }
 
 .animate-grow {
-  animation: grow 0.8s ease-out forwards;
-}
-
-.bar {
-  height: 0;
+  transform-origin: bottom;
   animation: grow 0.8s ease-out forwards;
 }

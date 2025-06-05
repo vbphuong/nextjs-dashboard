@@ -22,7 +22,7 @@ export default function AttitudeChart() {
   const [hoveredProvince, setHoveredProvince] = useState<{ name: string; score: number } | null>(null);
 
   return (
-    <div className="bg-gray-900/90 backdrop-blur-md text-white p-6 rounded-lg relative overflow-hidden" style={{ minHeight: '400px' }}>
+    <div className="bg-gray-900/90 backdrop-blur-md text-white p-6 rounded-lg relative overflow-hidden" style={{ minHeight: '400px', position: 'relative' }}>
       {/* Title */}
       <h3 className="text-lg md:text-xl font-semibold tracking-wide z-10 relative mb-4">
         Attitude Score (Positive/Negative) in Mekong Delta Provinces
@@ -33,31 +33,31 @@ export default function AttitudeChart() {
         <svg className="w-full h-full" preserveAspectRatio="none">
           <defs>
             <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" style={{ stopColor: 'rgba(0, 0, 0, 0.8)', stopOpacity: 1 }} />
-              <stop offset="100%" style={{ stopColor: 'rgba(0, 0, 0, 0.2)', stopOpacity: 1 }} />
+              <stop offset="0%" style={{ stopColor: 'rgba(0, 0, 0, 0.9)', stopOpacity: 1 }} />
+              <stop offset="100%" style={{ stopColor: 'rgba(0, 0, 0, 0.5)', stopOpacity: 1 }} />
             </linearGradient>
           </defs>
           <rect width="100%" height="100%" fill="url(#bgGradient)" />
-          <path d="M0,0 L100%,0 L100%,80% L0,100% Z" fill="none" stroke="rgba(234, 179, 8, 0.3)" strokeWidth="2" />
-          <path d="M0,20% L100%,20% L100%,100% L0,80% Z" fill="none" stroke="rgba(234, 179, 8, 0.3)" strokeWidth="2" />
-          <path d="M0,40% L100%,0 L100%,100% L0,60% Z" fill="none" stroke="rgba(234, 179, 8, 0.3)" strokeWidth="2" />
+          <path d="M0,0 L100%,0 L100%,80% L0,100% Z" fill="none" stroke="rgba(234, 179, 8, 0.2)" strokeWidth="2" />
+          <path d="M0,20% L100%,20% L100%,100% L0,80% Z" fill="none" stroke="rgba(234, 179, 8, 0.2)" strokeWidth="2" />
+          <path d="M0,40% L100%,0 L100%,100% L0,60% Z" fill="none" stroke="rgba(234, 179, 8, 0.2)" strokeWidth="2" />
         </svg>
       </div>
 
       {/* Chart Content */}
-      <div className="relative z-10 flex flex-col space-y-4">
+      <div className="relative z-10 flex flex-col space-y-6">
         {/* Y-Axis Labels and Grid Lines */}
-        <div className="absolute left-0 top-0 h-[300px] md:h-[350px] flex flex-col justify-between text-sm text-gray-400">
+        <div className="absolute left-0 top-0 h-[300px] md:h-[350px] flex flex-col justify-between text-sm text-gray-400 pr-4">
           {[100, 80, 60, 40, 20, 0].map((value) => (
-            <div key={value} className="relative flex items-center w-full">
-              <span className="absolute -left-8 z-10">{value}</span>
-              <div className="w-full h-px bg-gray-700/50 z-10"></div>
+            <div key={value} className="flex items-center">
+              <span className="z-10 mr-4">{value}</span>
+              <div className="flex-1 h-px bg-gray-700/50"></div>
             </div>
           ))}
         </div>
 
         {/* Bars */}
-        <div className="flex-1 flex justify-around items-end pl-10 h-[300px] md:h-[350px] relative z-10">
+        <div className="flex-1 flex justify-between items-end pl-16 h-[300px] md:h-[350px] relative z-10">
           {provinces.map((province, index) => (
             <div
               key={province.name}
@@ -66,11 +66,12 @@ export default function AttitudeChart() {
               onMouseLeave={() => setHoveredProvince(null)}
             >
               <div
-                className="bar bg-gradient-to-t from-yellow-600 to-yellow-300 rounded-t-lg w-full transition-all duration-500 hover:from-yellow-500 hover:to-yellow-200 hover:shadow-[0_0_15px_rgba(234,179,8,0.6)]"
+                className="bg-gradient-to-t from-yellow-600 to-yellow-300 rounded-t-lg w-full transition-all duration-500 hover:from-yellow-500 hover:to-yellow-200 hover:shadow-[0_0_15px_rgba(234,179,8,0.6)]"
                 style={{
-                  '--target-height': `${(province.score / maxScore) * 100}%`,
-                  animationDelay: `${index * 0.1}s`,
-                } as React.CSSProperties}
+                  height: `${(province.score / maxScore) * 100}%`,
+                  animation: `grow 0.8s ease-out ${index * 0.1}s forwards`,
+                  transformOrigin: 'bottom',
+                }}
               />
               {hoveredProvince?.name === province.name && (
                 <div className="absolute -top-8 bg-gray-800 text-white text-xs rounded-md px-2 py-1 shadow-lg z-20">
@@ -82,12 +83,11 @@ export default function AttitudeChart() {
         </div>
 
         {/* X-Axis Labels */}
-        <div className="flex justify-around pl-10 text-sm text-gray-300 z-10">
+        <div className="flex justify-between pl-16 text-sm text-gray-300 z-10">
           {provinces.map((province) => (
             <span
               key={province.name}
               className="text-center w-10 md:w-14 truncate"
-              style={{ writingMode: 'horizontal-tb' }}
             >
               {province.name}
             </span>
