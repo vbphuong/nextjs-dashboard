@@ -10,7 +10,7 @@ const links = [
   { name: 'Product', href: '/dashboard/product', icon: CubeIcon },
   { name: 'Environment', href: '/dashboard/environment', icon: SunIcon },
   { name: 'Market', href: '/dashboard/market', icon: ChartBarIcon },
-  { name: 'Supply Chain', href: '/dashboard/supply_chain', icon:TruckIcon },
+  { name: 'Supply Chain', href: '/dashboard/supply_chain', icon: TruckIcon },
 ];
 
 export default function NavLinks() {
@@ -24,9 +24,9 @@ export default function NavLinks() {
             key={link.name}
             href={link.href}
             className={clsx(
-              'flex h-[48px] grow items-center justify-center gap-2 rounded-md bg-gray-900/50 p-3 text-sm font-medium text-white hover:bg-blue-700 hover:text-white md:flex-none md:justify-start md:p-2 md:px-3',
+              'flex h-[48px] grow items-center justify-center gap-2 rounded-lg bg-gray-800/50 p-3 text-sm font-medium text-white hover:bg-blue-600 hover:scale-105 hover:shadow-[0_0_15px_rgba(59,130,246,0.5)] transition-all duration-300 md:flex-none md:justify-start md:p-2 md:px-3',
               {
-                'bg-blue-700 text-white': pathname === link.href,
+                'bg-blue-700 text-white shadow-[0_0_10px_rgba(59,130,246,0.3)]': pathname === link.href,
               },
             )}
           >
