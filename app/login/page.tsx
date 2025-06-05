@@ -1,16 +1,24 @@
 import AcmeLogo from '@/app/ui/acme-logo';
 import LoginForm from '@/app/ui/login-form';
 import { Suspense } from 'react';
- 
+import Image from 'next/image';
+
 export default function LoginPage() {
   return (
-    <main className="flex items-center justify-center md:h-screen">
-      <div className="relative mx-auto flex w-full max-w-[400px] flex-col space-y-2.5 p-4 md:-mt-32">
-        <div className="flex h-20 w-full items-end rounded-lg bg-blue-500 p-3 md:h-36">
-          <div className="w-32 text-white md:w-36">
-            <AcmeLogo />
+    <main className="relative min-h-screen flex items-center justify-center">
+      <Image
+        src="/login-background.png"
+        alt="Login Background"
+        fill
+        quality={100}
+      />
+      <div className="relative z-10 w-full max-w-md p-4">
+        <div className="absolute bottom-4 left-4">
+          <div className="w-10 h-10 bg-black rounded-full flex items-center justify-center">
+            <span className="text-white font-bold text-sm">N</span>
           </div>
         </div>
+        
         <Suspense>
           <LoginForm />
         </Suspense>
