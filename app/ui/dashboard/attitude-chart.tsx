@@ -47,7 +47,7 @@ export default function AttitudeChart() {
           ))}
         </div>
         <div className="flex-1 flex justify-around items-end pl-10 h-[300px] md:h-[400px] relative z-10">
-          {provinces.map((province, index) => (
+          {provinces.map((province) => (
             <div
               key={province.name}
               className="relative flex flex-col items-center w-10 md:w-14"
