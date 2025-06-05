@@ -52,60 +52,34 @@ export default function AttitudeChart() {
           ))}
         </div>
 
-        <div className="relative flex-1 pl-16 h-[300px] md:h-[350px] z-10">
-          <svg className="w-full h-full" preserveAspectRatio="none">
-            {provinces.map((province, index) => {
-              const barWidth = 100 / provinces.length;
-              const barHeight = (province.score / maxScore) * 150;
-              const xPosition = (index * barWidth) + (barWidth * 0.2);
-              const barActualWidth = barWidth * 0.6;
-
-              return (
-                <g key={province.name}>
-                  <rect
-                    x={`${xPosition}%`}
-                    y={`${120 - barHeight}%`}
-                    width={`${barActualWidth}%`}
-                    height={`${barHeight}%`}
-                    fill="url(#barGradient)"
-                    className="transition-all duration-500 hover:fill-[url(#barHoverGradient)] hover:shadow-[0_0_15px_rgba(234,179,8,0.6)]"
-                    onMouseEnter={() => setHoveredProvince(province)}
-                    onMouseLeave={() => setHoveredProvince(null)}
-                    style={{
-                      animation: `grow ${0.8 + index * 0.1}s ease-out forwards`,
-                      animationDelay: `${index * 0.1}s`,
-                      transformOrigin: 'bottom',
-                    }}
-                  />
-                  {hoveredProvince?.name === province.name && (
-                    <text
-                      x={`${xPosition + barActualWidth / 2}%`}
-                      y={`${100 - barHeight - 5}%`}
-                      textAnchor="middle"
-                      fill="white"
-                      fontSize="12"
-                      className="z-20"
-                    >
-                      {province.score}
-                    </text>
-                  )}
-                </g>
-              );
-            })}
-            <defs>
-              <linearGradient id="barGradient" x1="0%" y1="100%" x2="0%" y2="0%">
-                <stop offset="0%" style={{ stopColor: '#D97706', stopOpacity: 1 }} />
-                <stop offset="100%" style={{ stopColor: '#FDE68A', stopOpacity: 1 }} />
-              </linearGradient>
-              <linearGradient id="barHoverGradient" x1="0%" y1="100%" x2="0%" y2="0%">
-                <stop offset="0%" style={{ stopColor: '#F59E0B', stopOpacity: 1 }} />
-                <stop offset="100%" style={{ stopColor: '#FEF3C7', stopOpacity: 1 }} />
-              </linearGradient>
-            </defs>
-          </svg>
+        <div className="flex-1 flex justify-between items-end pl-16 h-[300px] md:h-[350px] relative z-10">
+          {provinces.map((province, index) => (
+            <div
+              key={province.name}
+              className="relative flex flex-col items-center w-10 md:w-14"
+              onMouseEnter={() => setHoveredProvince(province)}
+              onMouseLeave={() => setHoveredProvince(null)}
+            >
+              <div
+                className="bg-gradient-to-t from-yellow-600 to-yellow-300 rounded-t-lg w-full"
+                style={{
+                  height: `${(province.score / maxScore) * 300}px`,
+                  minHeight: '0',
+                  animation: `grow ${0.8 + index * 0.1}s ease-out forwards`,
+                  animationDelay: `${index * 0.1}s`,
+                  transformOrigin: 'bottom',
+                }}
+              />
+              {hoveredProvince?.name === province.name && (
+                <div className="absolute -top-8 bg-gray-800 text-white text-xs rounded-md px-2 py-1 shadow-lg z-20">
+                  {province.score}
+                </div>
+              )}
+            </div>
+          ))}
         </div>
 
-        <div className="absolute bottom-0 left-0 w-full pl-16 pt-20">
+        <div className="absolute bottom-0 left-0 w-full pl-16 pb-2">
           <div className="flex justify-between text-sm text-gray-300 z-10">
             {provinces.map((province) => (
               <span
