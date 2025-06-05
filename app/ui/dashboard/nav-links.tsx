@@ -1,6 +1,6 @@
 'use client';
 
-import { HomeIcon, UserIcon, CubeIcon, ChartBarIcon, TruckIcon, } from '@heroicons/react/24/outline';
+import { SunIcon, UserIcon, CubeIcon, ChartBarIcon, TruckIcon, } from '@heroicons/react/24/outline';
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -10,9 +10,9 @@ import clsx from 'clsx';
 // Depending on the size of the application, this would be stored in a database.
 
 const links = [
-   { name: 'Home', href: '/dashboard/home', icon: HomeIcon },
    { name: 'Customer', href: '/dashboard', icon: UserIcon }, // Represents a person or user
    { name: 'Product', href: '/dashboard/product', icon: CubeIcon }, // Represents a product or item
+   { name: 'Environment', href: '/dashboard/environment', icon: SunIcon }, 
    { name: 'Market', href: '/dashboard/market', icon: ChartBarIcon }, // Represents analytics or market trends
    { name: 'Supply Chain', href: '/dashboard/supply_chain', icon: TruckIcon }, // Represents logistics or delivery
   ];
