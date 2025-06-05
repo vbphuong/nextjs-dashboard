@@ -62,7 +62,7 @@ export default function Home() {
 
       {/* Title (2 Lines) */}
       <h1 className="text-4xl md:text-5xl font-bold text-center mb-8">
-        HopeThatIWillPass team's <br />
+        HopeThatIWillPass team&#39;s <br />
         <span
           className="bg-gradient-to-r from-orange-500 via-purple-500 to-blue-500 bg-clip-text text-transparent"
         >
