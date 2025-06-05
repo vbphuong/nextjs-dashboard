@@ -16,7 +16,7 @@ input[type='number']::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
- 
+
 @keyframes marquee {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
@@ -25,4 +25,22 @@ input[type='number']::-webkit-outer-spin-button {
 .animate-marquee {
   display: inline-block;
   animation: marquee 15s linear infinite;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+  scroll-behavior: smooth; /* Ensure smooth scrolling */
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.snap-x {
+  scroll-snap-type: x mandatory;
+}
+
+.snap-mandatory > div {
+  scroll-snap-align: center;
 }
