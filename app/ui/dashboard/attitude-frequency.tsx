@@ -128,9 +128,9 @@ export default function AttitudeFrequency() {
             <Line
               dataKey="frequency"
               type="monotone"
-              stroke="hsl(var(--blue-400))"
+              stroke="#93C5FD"
               strokeWidth={2}
-              dot={{ r: 4, fill: 'hsl(var(--blue-400))' }}
+              dot={{ r: 4, fill: '#2563EB' }}
             />
           </LineChart>
         </ChartContainer>
