@@ -61,7 +61,7 @@ export default function AttitudeChart() {
               onMouseLeave={() => setHoveredProvince(null)}
             >
               <div
-                className="bg-gradient-to-t from-yellow-600 to-yellow-300 rounded-t-lg w-full"
+                className="bg-gradient-to-t from-blue-400 to-blue-100 rounded-t-lg w-full"
                 style={{
                   height: `${(province.score / maxScore) * 350}px`,
                   minHeight: '0',
