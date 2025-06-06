@@ -3,23 +3,40 @@
 import { useState } from 'react';
 
 const provinces = [
-  { name: 'Long An', score: 65, change: 5, period: '1 month' },
-  { name: 'Tiền Giang', score: 72, change: -3, period: '1 month' },
-  { name: 'Bến Tre', score: 58, change: 2, period: '1 month' },
-  { name: 'Vĩnh Long', score: 45, change: -7, period: '1 month' },
-  { name: 'Trà Vinh', score: 80, change: 10, period: '1 month' },
-  { name: 'Hậu Giang', score: 62, change: 4, period: '1 month' },
-  { name: 'Sóc Trăng', score: 53, change: -1, period: '1 month' },
-  { name: 'Bạc Liêu', score: 70, change: 6, period: '1 month' },
-  { name: 'Cà Mau', score: 48, change: -5, period: '1 month' },
-  { name: 'Kiên Giang', score: 85, change: 8, period: '1 month' },
-  { name: 'An Giang', score: 67, change: 3, period: '1 month' },
-  { name: 'Đồng Tháp', score: 90, change: 12, period: '1 month' },
+  { name: 'Long An', score: 65, trend: [60, 62, 65, 63, 65] },
+  { name: 'Tiền Giang', score: 72, trend: [70, 71, 73, 72, 72] },
+  { name: 'Bến Tre', score: 58, trend: [55, 56, 58, 57, 58] },
+  { name: 'Vĩnh Long', score: 45, trend: [50, 48, 46, 45, 45] },
+  { name: 'Trà Vinh', score: 80, trend: [75, 77, 79, 80, 80] },
+  { name: 'Hậu Giang', score: 62, trend: [60, 61, 62, 61, 62] },
+  { name: 'Sóc Trăng', score: 53, trend: [55, 54, 53, 53, 53] },
+  { name: 'Bạc Liêu', score: 70, trend: [65, 67, 69, 70, 70] },
+  { name: 'Cà Mau', score: 48, trend: [50, 49, 48, 48, 48] },
+  { name: 'Kiên Giang', score: 85, trend: [80, 82, 84, 85, 85] },
+  { name: 'An Giang', score: 67, trend: [65, 66, 67, 67, 67] },
+  { name: 'Đồng Tháp', score: 90, trend: [85, 87, 89, 90, 90] },
 ];
 
 export default function AttitudeChart() {
   const maxScore = 100;
-  const [hoveredProvince, setHoveredProvince] = useState<{ name: string; score: number; change: number; period: string } | null>(null);
+  const [hoveredProvince, setHoveredProvince] = useState<{ name: string; score: number; trend: number[] } | null>(null);
+
+  const generateLineChartPath = (trend: number[]) => {
+    const maxTrend = Math.max(...trend);
+    const minTrend = Math.min(...trend);
+    const range = maxTrend - minTrend || 1;
+    const width = 120;
+    const height = 60;
+    const stepX = width / (trend.length - 1);
+
+    const points = trend.map((value, index) => {
+      const x = index * stepX;
+      const y = height - ((value - minTrend) / range) * (height - 10);
+      return `${x},${y}`;
+    });
+
+    return `M${points.join(' L')}`;
+  };
 
   return (
     <div className="bg-gray-900/90 backdrop-blur-md text-white p-6 rounded-lg relative overflow-hidden" style={{ minHeight: '400px', position: 'relative' }}>
@@ -71,13 +88,18 @@ export default function AttitudeChart() {
                 }}
               />
               {hoveredProvince?.name === province.name && (
-                <div className="absolute -top-16 bg-gray-800 text-white text-xs rounded-md px-4 py-2 shadow-lg z-20 w-40">
+                <div className="absolute -top-20 bg-gray-800 text-white text-xs rounded-md p-2 shadow-lg z-20 w-40">
                   <div className="flex flex-col space-y-1">
                     <span className="font-semibold">{province.name}</span>
                     <span>Score: {province.score}</span>
-                    <span>
-                      Change: {province.change > 0 ? '+' : ''}{province.change} ({province.period})
-                    </span>
+                    <svg width="120" height="60" className="mt-1">
+                      <path
+                        d={generateLineChartPath(province.trend)}
+                        fill="none"
+                        stroke="#60A5FA"
+                        strokeWidth="2"
+                      />
+                    </svg>
                   </div>
                 </div>
               )}
