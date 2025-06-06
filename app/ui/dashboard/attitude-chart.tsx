@@ -79,7 +79,7 @@ export default function AttitudeChart() {
           ))}
         </div>
 
-        <div className="absolute bottom-0 left-0 w-full pl-16 pb-2 mt-20 overflow-visible z-10">
+        <div className="relative left-0 w-full pl-16 pb-2 mt-6 overflow-visible z-10">
           <div className="flex justify-between text-sm text-gray-300 z-10">
             {provinces.map((province) => (
               <span
