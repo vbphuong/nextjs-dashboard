@@ -3,23 +3,23 @@
 import { useState } from 'react';
 
 const provinces = [
-  { name: 'Long An', score: 65 },
-  { name: 'Tiền Giang', score: 72 },
-  { name: 'Bến Tre', score: 58 },
-  { name: 'Vĩnh Long', score: 45 },
-  { name: 'Trà Vinh', score: 80 },
-  { name: 'Hậu Giang', score: 62 },
-  { name: 'Sóc Trăng', score: 53 },
-  { name: 'Bạc Liêu', score: 70 },
-  { name: 'Cà Mau', score: 48 },
-  { name: 'Kiên Giang', score: 85 },
-  { name: 'An Giang', score: 67 },
-  { name: 'Đồng Tháp', score: 90 },
+  { name: 'Long An', score: 65, change: 5, period: '1 month' },
+  { name: 'Tiền Giang', score: 72, change: -3, period: '1 month' },
+  { name: 'Bến Tre', score: 58, change: 2, period: '1 month' },
+  { name: 'Vĩnh Long', score: 45, change: -7, period: '1 month' },
+  { name: 'Trà Vinh', score: 80, change: 10, period: '1 month' },
+  { name: 'Hậu Giang', score: 62, change: 4, period: '1 month' },
+  { name: 'Sóc Trăng', score: 53, change: -1, period: '1 month' },
+  { name: 'Bạc Liêu', score: 70, change: 6, period: '1 month' },
+  { name: 'Cà Mau', score: 48, change: -5, period: '1 month' },
+  { name: 'Kiên Giang', score: 85, change: 8, period: '1 month' },
+  { name: 'An Giang', score: 67, change: 3, period: '1 month' },
+  { name: 'Đồng Tháp', score: 90, change: 12, period: '1 month' },
 ];
 
 export default function AttitudeChart() {
   const maxScore = 100;
-  const [hoveredProvince, setHoveredProvince] = useState<{ name: string; score: number } | null>(null);
+  const [hoveredProvince, setHoveredProvince] = useState<{ name: string; score: number; change: number; period: string } | null>(null);
 
   return (
     <div className="bg-gray-900/90 backdrop-blur-md text-white p-6 rounded-lg relative overflow-hidden" style={{ minHeight: '400px', position: 'relative' }}>
@@ -36,9 +36,9 @@ export default function AttitudeChart() {
             </linearGradient>
           </defs>
           <rect width="100%" height="100%" fill="url(#bgGradient)" />
-          <path d="M0,0 L100%,0 L100%,80% L0,100% Z" fill="none" stroke="rgba(234, 179, 8, 0.2)" strokeWidth="2" />
-          <path d="M0,20% L100%,20% L100%,100% L0,80% Z" fill="none" stroke="rgba(234, 179, 8, 0.2)" strokeWidth="2" />
-          <path d="M0,40% L100%,0 L100%,100% L0,60% Z" fill="none" stroke="rgba(234, 179, 8, 0.2)" strokeWidth="2" />
+          <path d="M0,0 L100%,0 L100%,80% L0,100% Z" fill="none" stroke="rgba(59, 130, 246, 0.2)" strokeWidth="2" />
+          <path d="M0,20% L100%,20% L100%,100% L0,80% Z" fill="none" stroke="rgba(59, 130, 246, 0.2)" strokeWidth="2" />
+          <path d="M0,40% L100%,0 L100%,100% L0,60% Z" fill="none" stroke="rgba(59, 130, 246, 0.2)" strokeWidth="2" />
         </svg>
       </div>
 
@@ -71,8 +71,14 @@ export default function AttitudeChart() {
                 }}
               />
               {hoveredProvince?.name === province.name && (
-                <div className="absolute -top-8 bg-gray-800 text-white text-xs rounded-md px-2 py-1 shadow-lg z-20">
-                  {province.score}
+                <div className="absolute -top-16 bg-gray-800 text-white text-xs rounded-md px-4 py-2 shadow-lg z-20 w-40">
+                  <div className="flex flex-col space-y-1">
+                    <span className="font-semibold">{province.name}</span>
+                    <span>Score: {province.score}</span>
+                    <span>
+                      Change: {province.change > 0 ? '+' : ''}{province.change} ({province.period})
+                    </span>
+                  </div>
                 </div>
               )}
             </div>
