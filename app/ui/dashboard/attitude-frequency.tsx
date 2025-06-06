@@ -1,14 +1,28 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const months = [
   'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec',
 ];
-const data = [45, 50, 55, 60, 65, 70, 68, 72, 75, 70, 65, 60];
+const data = [10, 20, 30, 40, 50, 60, 70, 65, 60, 55, 45, 30];
 
 export default function AttitudeFrequency() {
   const [hoveredMonth, setHoveredMonth] = useState<string | null>(null);
+  const [drawLength, setDrawLength] = useState(0);
+
+  useEffect(() => {
+    const animation = setInterval(() => {
+      setDrawLength((prev) => {
+        if (prev >= 100) {
+          clearInterval(animation);
+          return 100;
+        }
+        return prev + 1;
+      });
+    }, 20);
+    return () => clearInterval(animation);
+  }, []);
 
   const generateLineChartPath = (data: number[]) => {
     const maxValue = Math.max(...data);
@@ -24,7 +38,9 @@ export default function AttitudeFrequency() {
       return `${x},${y}`;
     });
 
-    return `M${points.join(' L')}`;
+    const totalLength = points.length - 1;
+    const drawPoints = points.slice(0, Math.ceil((drawLength / 100) * totalLength) + 1);
+    return drawPoints.length > 1 ? `M${drawPoints.join(' L')}` : '';
   };
 
   return (
