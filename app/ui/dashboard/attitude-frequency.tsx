@@ -12,16 +12,16 @@ export default function AttitudeFrequency() {
   const [drawLength, setDrawLength] = useState(0);
 
   useEffect(() => {
-    const animation = setInterval(() => {
-      setDrawLength((prev) => {
-        if (prev >= 100) {
-          clearInterval(animation);
-          return 100;
-        }
-        return prev + 1;
-      });
-    }, 20);
-    return () => clearInterval(animation);
+    let start: number | null = null;
+    const animate = (timestamp: number) => {
+      if (!start) start = timestamp;
+      const progress = (timestamp - start) / 2000;
+      setDrawLength(Math.min(progress * 100, 100));
+      if (progress < 1) {
+        requestAnimationFrame(animate);
+      }
+    };
+    requestAnimationFrame(animate);
   }, []);
 
   const generateLineChartPath = (data: number[]) => {
@@ -38,9 +38,10 @@ export default function AttitudeFrequency() {
       return `${x},${y}`;
     });
 
-    const totalLength = points.length - 1;
-    const drawPoints = points.slice(0, Math.ceil((drawLength / 100) * totalLength) + 1);
-    return drawPoints.length > 1 ? `M${drawPoints.join(' L')}` : '';
+    const totalPoints = points.length;
+    const drawPointsCount = Math.ceil((drawLength / 100) * totalPoints);
+    const drawPoints = points.slice(0, drawPointsCount);
+    return drawPoints.length > 1 ? `M${drawPoints.join(' L')}` : points[0] || '';
   };
 
   return (
@@ -88,16 +89,19 @@ export default function AttitudeFrequency() {
               const range = maxValue - minValue || 1;
               const x = (index / (data.length - 1)) * 100;
               const y = 200 - ((value - minValue) / range) * (200 - 20);
+              const isVisible = (index / (data.length - 1)) * 100 <= drawLength;
               return (
-                <circle
-                  key={index}
-                  cx={`${x}%`}
-                  cy={`${y}px`}
-                  r="4"
-                  fill="#60A5FA"
-                  onMouseEnter={() => setHoveredMonth(months[index])}
-                  onMouseLeave={() => setHoveredMonth(null)}
-                />
+                isVisible && (
+                  <circle
+                    key={index}
+                    cx={`${x}%`}
+                    cy={`${y}px`}
+                    r="4"
+                    fill="#60A5FA"
+                    onMouseEnter={() => setHoveredMonth(months[index])}
+                    onMouseLeave={() => setHoveredMonth(null)}
+                  />
+                )
               );
             })}
           </svg>
