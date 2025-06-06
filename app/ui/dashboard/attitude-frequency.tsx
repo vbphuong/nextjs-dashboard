@@ -49,7 +49,7 @@ export default function AttitudeFrequency() {
   );
 
   return (
-    <Card className="py-4 sm:py-0">
+    <Card className="py-4 sm:py-0 bg-gray-900/90 backdrop-blur-md rounded-lg relative overflow-hidden">
       <CardHeader className="flex flex-col items-stretch border-b !p-0 sm:flex-row">
         <div className="flex flex-1 flex-col justify-center gap-1 px-6 pb-3 sm:pb-0">
           <CardTitle>Attitude Frequency - January to December 2025</CardTitle>
@@ -68,10 +68,24 @@ export default function AttitudeFrequency() {
           </div>
         </div>
       </CardHeader>
-      <CardContent className="px-2 sm:p-6">
+      <CardContent className="px-2 sm:p-6 relative">
+        <div className="absolute inset-0 z-0">
+          <svg className="w-full h-full" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style={{ stopColor: 'rgba(0, 0, 0, 0.9)', stopOpacity: 1 }} />
+                <stop offset="100%" style={{ stopColor: 'rgba(0, 0, 0, 0.5)', stopOpacity: 1 }} />
+              </linearGradient>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#bgGradient)" />
+            <path d="M0,0 L100%,0 L100%,80% L0,100% Z" fill="none" stroke="rgba(255, 255, 255, 0.2)" strokeWidth="2" />
+            <path d="M0,20% L100%,20% L100%,100% L0,80% Z" fill="none" stroke="rgba(255, 255, 255, 0.2)" strokeWidth="2" />
+            <path d="M0,40% L100%,0 L100%,100% L0,60% Z" fill="none" stroke="rgba(255, 255, 255, 0.2)" strokeWidth="2" />
+          </svg>
+        </div>
         <ChartContainer
           config={chartConfig}
-          className="aspect-auto h-[250px] w-full"
+          className="aspect-auto h-[250px] w-full relative z-10"
         >
           <LineChart
             accessibilityLayer
@@ -81,7 +95,7 @@ export default function AttitudeFrequency() {
               right: 12,
             }}
           >
-            <CartesianGrid vertical={false} />
+            <CartesianGrid vertical={false} stroke="white" />
             <XAxis
               dataKey="date"
               tickLine={false}
@@ -94,6 +108,7 @@ export default function AttitudeFrequency() {
                   month: 'short',
                 });
               }}
+              tick={{ fill: 'white' }}
             />
             <ChartTooltip
               content={
@@ -106,15 +121,16 @@ export default function AttitudeFrequency() {
                       year: 'numeric',
                     });
                   }}
+                  labelClassName="text-white"
                 />
               }
             />
             <Line
               dataKey="frequency"
               type="monotone"
-              stroke="#60A5FA"
+              stroke="white"
               strokeWidth={2}
-              dot={{ r: 4, fill: '#60A5FA' }}
+              dot={{ r: 4, fill: 'white' }}
             />
           </LineChart>
         </ChartContainer>
