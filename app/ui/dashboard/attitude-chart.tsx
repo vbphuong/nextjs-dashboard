@@ -63,7 +63,7 @@ export default function AttitudeChart() {
               <div
                 className="bg-gradient-to-t from-yellow-600 to-yellow-300 rounded-t-lg w-full"
                 style={{
-                  height: `${(province.score / maxScore) * 250}px`,
+                  height: `${(province.score / maxScore) * 350}px`,
                   minHeight: '0',
                   animation: `grow ${0.8 + index * 0.1}s ease-out forwards`,
                   animationDelay: `${index * 0.1}s`,
@@ -79,7 +79,7 @@ export default function AttitudeChart() {
           ))}
         </div>
 
-        <div className="absolute bottom-0 left-0 w-full pl-16 pb-2 mt-2 overflow-visible">
+        <div className="absolute bottom-0 left-0 w-full pl-16 pb-2 mt-2 overflow-visible z-10">
           <div className="flex justify-between text-sm text-gray-300 z-10">
             {provinces.map((province) => (
               <span
