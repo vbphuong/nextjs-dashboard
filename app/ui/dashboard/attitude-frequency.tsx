@@ -1,125 +1,124 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import * as React from 'react';
+import { CartesianGrid, Line, LineChart, XAxis } from 'recharts';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
+import {
+  ChartConfig,
+  ChartContainer,
+  ChartTooltip,
+  ChartTooltipContent,
+} from '@/components/ui/chart';
 
-const months = [
-  'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec',
+export const description = 'An interactive line chart for attitude frequency';
+
+const chartData = [
+  { date: '2025-01-01', frequency: 10 },
+  { date: '2025-02-01', frequency: 20 },
+  { date: '2025-03-01', frequency: 30 },
+  { date: '2025-04-01', frequency: 40 },
+  { date: '2025-05-01', frequency: 50 },
+  { date: '2025-06-01', frequency: 60 },
+  { date: '2025-07-01', frequency: 70 },
+  { date: '2025-08-01', frequency: 65 },
+  { date: '2025-09-01', frequency: 60 },
+  { date: '2025-10-01', frequency: 55 },
+  { date: '2025-11-01', frequency: 45 },
+  { date: '2025-12-01', frequency: 30 },
 ];
-const data = [10, 20, 30, 40, 50, 60, 70, 65, 60, 55, 45, 30];
+
+const chartConfig = {
+  frequency: {
+    label: 'Frequency',
+    color: 'hsl(var(--chart-1))',
+  },
+} satisfies ChartConfig;
 
 export default function AttitudeFrequency() {
-  const [hoveredMonth, setHoveredMonth] = useState<string | null>(null);
-  const [drawLength, setDrawLength] = useState(0);
-
-  useEffect(() => {
-    let start: number | null = null;
-    const animate = (timestamp: number) => {
-      if (!start) start = timestamp;
-      const progress = (timestamp - start) / 2000;
-      setDrawLength(Math.min(progress * 100, 100));
-      if (progress < 1) {
-        requestAnimationFrame(animate);
-      }
-    };
-    requestAnimationFrame(animate);
-  }, []);
-
-  const generateLineChartPath = (data: number[]) => {
-    const maxValue = Math.max(...data);
-    const minValue = Math.min(...data);
-    const range = maxValue - minValue || 1;
-    const width = 100;
-    const height = 200;
-    const stepX = width / (data.length - 1);
-
-    const points = data.map((value, index) => {
-      const x = index * stepX;
-      const y = height - ((value - minValue) / range) * (height - 20);
-      return `${x},${y}`;
-    });
-
-    const totalPoints = points.length;
-    const drawPointsCount = Math.ceil((drawLength / 100) * totalPoints);
-    const drawPoints = points.slice(0, drawPointsCount);
-    return drawPoints.length > 1 ? `M${drawPoints.join(' L')}` : points[0] || '';
-  };
+  const total = React.useMemo(
+    () => ({
+      frequency: chartData.reduce((acc, curr) => acc + curr.frequency, 0),
+    }),
+    []
+  );
 
   return (
-    <div className="bg-gray-900/90 backdrop-blur-md text-white p-6 rounded-lg relative overflow-hidden" style={{ minHeight: '400px', position: 'relative' }}>
-      <h3 className="text-lg md:text-xl font-semibold tracking-wide z-10 relative mb-4">
-        Attitude Frequency - January - December 2025
-      </h3>
-      
-      <div className="absolute inset-0 z-0">
-        <svg className="w-full h-full" preserveAspectRatio="none">
-          <defs>
-            <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" style={{ stopColor: 'rgba(0, 0, 0, 0.9)', stopOpacity: 1 }} />
-              <stop offset="100%" style={{ stopColor: 'rgba(0, 0, 0, 0.5)', stopOpacity: 1 }} />
-            </linearGradient>
-          </defs>
-          <rect width="100%" height="100%" fill="url(#bgGradient)" />
-          <path d="M0,0 L100%,0 L100%,80% L0,100% Z" fill="none" stroke="rgba(59, 130, 246, 0.2)" strokeWidth="2" />
-          <path d="M0,20% L100%,20% L100%,100% L0,80% Z" fill="none" stroke="rgba(59, 130, 246, 0.2)" strokeWidth="2" />
-          <path d="M0,40% L100%,0 L100%,100% L0,60% Z" fill="none" stroke="rgba(59, 130, 246, 0.2)" strokeWidth="2" />
-        </svg>
-      </div>
-
-      <div className="relative z-10 flex flex-col h-full">
-        <div className="absolute left-0 top-0 h-[200px] flex flex-col justify-between text-sm text-gray-400 pr-4">
-          {[80, 60, 40, 20, 0].map((value) => (
-            <div key={value} className="flex items-center">
-              <span className="z-10 mr-4">{value}</span>
-              <div className="flex-1 h-px bg-gray-700/50"></div>
-            </div>
-          ))}
+    <Card className="py-4 sm:py-0">
+      <CardHeader className="flex flex-col items-stretch border-b !p-0 sm:flex-row">
+        <div className="flex flex-1 flex-col justify-center gap-1 px-6 pb-3 sm:pb-0">
+          <CardTitle>Attitude Frequency - January to December 2025</CardTitle>
+          <CardDescription>
+            Showing attitude frequency trend for the year 2025
+          </CardDescription>
         </div>
-
-        <div className="relative pl-16 h-[200px] z-10">
-          <svg width="100%" height="200" className="w-full">
-            <path
-              d={generateLineChartPath(data)}
-              fill="none"
-              stroke="#60A5FA"
-              strokeWidth="2"
-            />
-            {data.map((value, index) => {
-              const maxValue = Math.max(...data);
-              const minValue = Math.min(...data);
-              const range = maxValue - minValue || 1;
-              const x = (index / (data.length - 1)) * 100;
-              const y = 200 - ((value - minValue) / range) * (200 - 20);
-              const isVisible = (index / (data.length - 1)) * 100 <= drawLength;
-              return (
-                isVisible && (
-                  <circle
-                    key={index}
-                    cx={`${x}%`}
-                    cy={`${y}px`}
-                    r="4"
-                    fill="#60A5FA"
-                    onMouseEnter={() => setHoveredMonth(months[index])}
-                    onMouseLeave={() => setHoveredMonth(null)}
-                  />
-                )
-              );
-            })}
-          </svg>
-          {hoveredMonth && (
-            <div className="absolute -top-10 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs rounded-md px-2 py-1 shadow-lg z-20">
-              {hoveredMonth}: {data[months.indexOf(hoveredMonth)]}
-            </div>
-          )}
-        </div>
-
-        <div className="flex justify-between pl-16 text-sm text-gray-300 mt-2 z-10">
-          {months.map((month) => (
-            <span key={month} className="w-8 text-center truncate">
-              {month}
+        <div className="flex">
+          <div className="flex flex-1 flex-col justify-center gap-1 border-t px-6 py-4 text-left sm:border-t-0 sm:border-l sm:px-8 sm:py-6">
+            <span className="text-muted-foreground text-xs">
+              {chartConfig.frequency.label}
             </span>
-          ))}
+            <span className="text-lg leading-none font-bold sm:text-3xl">
+              {total.frequency.toLocaleString()}
+            </span>
+          </div>
         </div>
-      </div>
-    </div>
+      </CardHeader>
+      <CardContent className="px-2 sm:p-6">
+        <ChartContainer
+          config={chartConfig}
+          className="aspect-auto h-[250px] w-full"
+        >
+          <LineChart
+            accessibilityLayer
+            data={chartData}
+            margin={{
+              left: 12,
+              right: 12,
+            }}
+          >
+            <CartesianGrid vertical={false} />
+            <XAxis
+              dataKey="date"
+              tickLine={false}
+              axisLine={false}
+              tickMargin={8}
+              minTickGap={32}
+              tickFormatter={(value) => {
+                const date = new Date(value);
+                return date.toLocaleDateString('en-US', {
+                  month: 'short',
+                });
+              }}
+            />
+            <ChartTooltip
+              content={
+                <ChartTooltipContent
+                  className="w-[150px]"
+                  nameKey="frequency"
+                  labelFormatter={(value) => {
+                    return new Date(value).toLocaleDateString('en-US', {
+                      month: 'short',
+                      year: 'numeric',
+                    });
+                  }}
+                />
+              }
+            />
+            <Line
+              dataKey="frequency"
+              type="monotone"
+              stroke="#60A5FA"
+              strokeWidth={2}
+              dot={{ r: 4, fill: '#60A5FA' }}
+            />
+          </LineChart>
+        </ChartContainer>
+      </CardContent>
+    </Card>
   );
 }
