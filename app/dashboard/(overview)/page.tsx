@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import AttitudeChart from '@/app/ui/dashboard/attitude-chart';
 import AttitudeFrequency from '@/app/ui/dashboard/attitude-frequency';
 import DemographicsCharts from '@/app/ui/dashboard/demographics-chart';
+import ProductsTable from '@/app/ui/dashboard/products-table';
 
 // Animation variants for the heading (word-by-word)
 const headingVariants = {
@@ -61,16 +62,16 @@ export default function DashboardPage() {
 
   const cards = [
     {
-      title: 'Scale of morality',
-      description: 'Attitude of people is calculated and put to compare among different provinces',
+      title: 'Customer Insights',
+      description: 'Gain deep understanding of customer preferences to tailor services effectively.',
     },
     {
-      title: 'Groups of individuals',
-      description: 'Some groups of people would be separated to provide better vision about market',
+      title: 'Regional Trends',
+      description: 'Track attitude shifts across Mekong Delta provinces for strategic planning.',
     },
     {
-      title: 'Notification',
-      description: 'Some significant products which gonna run out would be annouced, so do discounted one',
+      title: 'Sustainable Growth',
+      description: 'Leverage data to foster long-term customer relationships and growth.',
     },
   ];
 
@@ -129,6 +130,7 @@ export default function DashboardPage() {
             Groups of people based on characteristics
           </motion.h2>
           <DemographicsCharts />
+          <ProductsTable />
         </div>
       </section>
     </div>

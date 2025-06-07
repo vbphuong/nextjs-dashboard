@@ -192,6 +192,17 @@ input[type='number']::-webkit-outer-spin-button {
   }
 }
 
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
 .animate-drawLine {
   stroke-dasharray: 1000;
   stroke-dashoffset: 1000;
@@ -208,6 +219,10 @@ input[type='number']::-webkit-outer-spin-button {
 
 .animate-fadeIn {
   animation: fadeIn 0.5s ease-out forwards;
+}
+
+.animate-slideIn {
+  animation: slideIn 0.5s ease-out forwards;
 }
 
 /* Dynamic delay classes for points */
