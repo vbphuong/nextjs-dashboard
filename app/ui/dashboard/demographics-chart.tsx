@@ -37,10 +37,10 @@ const incomeData = [
 ];
 
 const regionData = [
-  { category: 'Bắc', count: 200, fill: 'hsl(221, 83%, 20%)' },
-  { category: 'Nam', count: 450, fill: 'hsl(221, 83%, 30%)' },
-  { category: 'Trung', count: 250, fill: 'hsl(221, 83%, 40%)' },
-  { category: 'Nước ngoài', count: 50, fill: 'hsl(221, 83%, 50%)' },
+  { category: 'North', count: 200, fill: 'hsl(221, 83%, 20%)' },
+  { category: 'South', count: 450, fill: 'hsl(221, 83%, 30%)' },
+  { category: 'Middle', count: 250, fill: 'hsl(221, 83%, 40%)' },
+  { category: 'Foreign', count: 50, fill: 'hsl(221, 83%, 50%)' },
 ];
 
 const genderData = [

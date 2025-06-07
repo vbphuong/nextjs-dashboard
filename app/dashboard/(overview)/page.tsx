@@ -61,16 +61,16 @@ export default function DashboardPage() {
 
   const cards = [
     {
-      title: 'Customer Insights',
-      description: 'Gain deep understanding of customer preferences to tailor services effectively.',
+      title: 'Scale of morality',
+      description: 'Attitude of people is calculated and put to compare among different provinces',
     },
     {
-      title: 'Regional Trends',
-      description: 'Track attitude shifts across Mekong Delta provinces for strategic planning.',
+      title: 'Groups of individuals',
+      description: 'Some groups of people would be separated to provide better vision about market',
     },
     {
-      title: 'Sustainable Growth',
-      description: 'Leverage data to foster long-term customer relationships and growth.',
+      title: 'Notification',
+      description: 'Some significant products which gonna run out would be annouced, so do discounted one',
     },
   ];
 
