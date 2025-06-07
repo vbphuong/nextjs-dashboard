@@ -41,8 +41,9 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-const CustomDot = (props: any) => {
-  const { cx, cy, index, isVisible } = props;
+// Custom Dot component to handle per-dot animations
+const CustomDot = ({ cx, cy, index, isVisible }: { cx?: number; cy?: number; index?: number; isVisible: boolean }) => {
+  if (!cx || !cy || index === undefined) return null;
   return (
     <circle
       cx={cx}
@@ -168,9 +169,9 @@ export default function AttitudeFrequency() {
               type="monotone"
               stroke="#93C5FD"
               strokeWidth={2}
-              dot={(props) => <CustomDot {...props} />}
               className={isVisible ? 'animate-drawLine' : ''}
-            />;
+              dot={(props) => <CustomDot {...props} index={props.index} isVisible={isVisible} />}
+            />
           </LineChart>
         </ChartContainer>
       </CardContent>
