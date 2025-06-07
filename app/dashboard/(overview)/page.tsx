@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import AttitudeChart from '@/app/ui/dashboard/attitude-chart';
 import AttitudeFrequency from '@/app/ui/dashboard/attitude-frequency';
+import DemographicsCharts from '@/app/ui/dashboard/demographics-chart';
 
 // Animation variants for the heading (word-by-word)
 const headingVariants = {
@@ -28,6 +29,19 @@ const cardVariants = {
       duration: 0.5,
       ease: 'easeOut',
       delay: 0.8,
+    },
+  },
+};
+
+// Animation variants for the demographics title
+const titleVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.5,
+      ease: 'easeOut',
     },
   },
 };
@@ -104,6 +118,17 @@ export default function DashboardPage() {
         <div className="w-full max-w-7xl">
           <AttitudeChart />
           <AttitudeFrequency />
+          <div className="h-[10vh]" /> {/* 10% height spacer */}
+          <motion.h2
+            className="text-2xl md:text-3xl font-semibold text-center text-blue-200 mb-6"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+            variants={titleVariants}
+          >
+            Groups of people based on characteristics
+          </motion.h2>
+          <DemographicsCharts />
         </div>
       </section>
     </div>
