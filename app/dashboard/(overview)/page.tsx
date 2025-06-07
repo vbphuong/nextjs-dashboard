@@ -18,8 +18,8 @@ const headingVariants = {
   }),
 };
 
-// Animation variants for the paragraph (all at once)
-const paragraphVariants = {
+// Animation variants for the cards (fade-in together)
+const cardVariants = {
   hidden: { opacity: 0, y: 20 },
   visible: {
     opacity: 1,
@@ -27,26 +27,12 @@ const paragraphVariants = {
     transition: {
       duration: 0.5,
       ease: 'easeOut',
-      delay: 0.8, // Delay after heading animation
-    },
-  },
-};
-
-// Animation variants for the chart (scroll-based)
-const chartVariants = {
-  hidden: { opacity: 0, y: 50 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.8,
-      ease: 'easeOut',
+      delay: 0.8,
     },
   },
 };
 
 export default function DashboardPage() {
-  // Split the heading into words for animation
   const headingText = [
     'Focusing',
     'on',
@@ -59,11 +45,26 @@ export default function DashboardPage() {
     'Delta',
   ];
 
+  const cards = [
+    {
+      title: 'Customer Insights',
+      description: 'Gain deep understanding of customer preferences to tailor services effectively.',
+    },
+    {
+      title: 'Regional Trends',
+      description: 'Track attitude shifts across Mekong Delta provinces for strategic planning.',
+    },
+    {
+      title: 'Sustainable Growth',
+      description: 'Leverage data to foster long-term customer relationships and growth.',
+    },
+  ];
+
   return (
-    <div className="w-full min-h-screen bg-gray-900 text-white">
+    <div className="w-full min-h-screen bg-transparent text-white">
       {/* Introductory Section */}
       <section className="min-h-screen flex flex-col items-center justify-center px-4">
-        <h1 className="text-4xl md:text-5xl font-bold text-center mb-8">
+        <h1 className="text-4xl md:text-5xl font-bold text-center">
           {headingText.map((word, index) => (
             <motion.span
               key={index}
@@ -81,42 +82,29 @@ export default function DashboardPage() {
             </motion.span>
           ))}
         </h1>
-        <motion.p
-          className="text-lg md:text-xl text-center max-w-2xl text-gray-200"
-          initial="hidden"
-          animate="visible"
-          variants={paragraphVariants}
-        >
-          Understanding customer attitudes in the Mekong Delta is crucial for
-          building stronger connections and driving sustainable growth in the
-          region.
-        </motion.p>
+        <div className="h-[10vh]" /> {/* 10% height spacer */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-7xl w-full">
+          {cards.map((card, index) => (
+            <motion.div
+              key={index}
+              className="bg-gray-900/80 backdrop-blur-md p-6 rounded-lg"
+              initial="hidden"
+              animate="visible"
+              variants={cardVariants}
+            >
+              <h3 className="text-xl font-semibold text-blue-200 mb-2">{card.title}</h3>
+              <p className="text-gray-300">{card.description}</p>
+            </motion.div>
+          ))}
+        </div>
       </section>
 
       {/* Chart Section */}
-      <section className="min-h-screen flex flex-col items-center justify-center px-4">
-        <motion.div
-          className="w-full max-w-7xl"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-          variants={chartVariants}
-        >
+      <section className="flex flex-col items-center justify-start">
+        <div className="w-full max-w-7xl">
           <AttitudeChart />
-        </motion.div>
-      </section>
-
-      {/* Frequency Section */}
-      <section className="min-h-screen flex flex-col items-center justify-center px-4">
-        <motion.div
-          className="w-full max-w-7xl"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-          variants={chartVariants}
-        >
           <AttitudeFrequency />
-        </motion.div>
+        </div>
       </section>
     </div>
   );

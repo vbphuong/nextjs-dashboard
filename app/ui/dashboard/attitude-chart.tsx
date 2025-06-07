@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 const provinces = [
   { name: 'Long An', score: 65, trend: [60, 62, 65, 63, 65] },
@@ -20,6 +20,26 @@ const provinces = [
 export default function AttitudeChart() {
   const maxScore = 100;
   const [hoveredProvince, setHoveredProvince] = useState<{ name: string; score: number; trend: number[] } | null>(null);
+  const [isVisible, setIsVisible] = useState(false);
+  const chartRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.2 }
+    );
+
+    if (chartRef.current) {
+      observer.observe(chartRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
 
   const generateLineChartPath = (trend: number[]) => {
     const maxTrend = Math.max(...trend);
@@ -39,11 +59,15 @@ export default function AttitudeChart() {
   };
 
   return (
-    <div className="bg-gray-900/90 backdrop-blur-md text-white p-6 rounded-lg relative overflow-hidden" style={{ minHeight: '400px', position: 'relative' }}>
+    <div
+      ref={chartRef}
+      className="bg-gray-900/90 backdrop-blur-md text-white p-6 rounded-lg relative overflow-hidden"
+      style={{ minHeight: '400px', position: 'relative' }}
+    >
       <h3 className="text-lg md:text-xl font-semibold tracking-wide z-10 relative mb-4">
         Attitude Score in 12 different Mekong Delta Provinces
       </h3>
-      
+
       <div className="absolute inset-0 z-0">
         <svg className="w-full h-full" preserveAspectRatio="none">
           <defs>
@@ -78,13 +102,14 @@ export default function AttitudeChart() {
               onMouseLeave={() => setHoveredProvince(null)}
             >
               <div
-                className="bg-gradient-to-t from-blue-400 to-blue-100 rounded-t-lg w-full"
+                className={`bg-gradient-to-t from-blue-400 to-blue-100 rounded-t-lg w-full ${
+                  isVisible ? 'animate-grow' : ''
+                }`}
                 style={{
                   height: `${(province.score / maxScore) * 325}px`,
                   minHeight: '0',
-                  animation: `grow ${0.8 + index * 0.1}s ease-out forwards`,
-                  animationDelay: `${index * 0.1}s`,
                   transformOrigin: 'bottom',
+                  animationDelay: isVisible ? `${index * 0.1}s` : '0s',
                 }}
               />
               {hoveredProvince?.name === province.name && (

@@ -1,6 +1,7 @@
 'use client';
 
 import * as React from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { CartesianGrid, Line, LineChart, XAxis } from 'recharts';
 import {
   Card,
@@ -41,6 +42,27 @@ const chartConfig = {
 } satisfies ChartConfig;
 
 export default function AttitudeFrequency() {
+  const [isVisible, setIsVisible] = useState(false);
+  const chartRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.2 }
+    );
+
+    if (chartRef.current) {
+      observer.observe(chartRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
   const total = React.useMemo(
     () => ({
       frequency: chartData.reduce((acc, curr) => acc + curr.frequency, 0),
@@ -49,7 +71,10 @@ export default function AttitudeFrequency() {
   );
 
   return (
-    <Card className="py-4 sm:py-0 bg-gray-900/90 backdrop-blur-md rounded-lg relative overflow-hidden">
+    <Card
+      ref={chartRef}
+      className="py-4 sm:py-0 bg-gray-900/90 backdrop-blur-md rounded-lg relative overflow-hidden"
+    >
       <CardHeader className="flex flex-col items-stretch border-b !p-0 sm:flex-row">
         <div className="flex flex-1 flex-col justify-center gap-1 px-6 pb-3 sm:pb-0">
           <CardTitle className="text-blue-200">Attitude Frequency - January to December 2025</CardTitle>
@@ -131,6 +156,7 @@ export default function AttitudeFrequency() {
               stroke="#93C5FD"
               strokeWidth={2}
               dot={{ r: 4, fill: '#2563EB' }}
+              className={isVisible ? 'animate-fadeIn' : ''}
             />
           </LineChart>
         </ChartContainer>
