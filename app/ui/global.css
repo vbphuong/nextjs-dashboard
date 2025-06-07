@@ -181,6 +181,35 @@ input[type='number']::-webkit-outer-spin-button {
   }
 }
 
+@keyframes drawLine {
+  from {
+    stroke-dashoffset: 1000;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes showPoints {
+  from {
+    opacity: 0;
+    transform: scale(0);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes grow {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -200,6 +229,17 @@ input[type='number']::-webkit-outer-spin-button {
   to {
     opacity: 1;
     transform: translateX(0);
+  }
+}
+
+@keyframes tabScale {
+  from {
+    opacity: 0;
+    scale: 0.9;
+  }
+  to {
+    opacity: 1;
+    scale: 1;
   }
 }
 
@@ -223,6 +263,10 @@ input[type='number']::-webkit-outer-spin-button {
 
 .animate-slideIn {
   animation: slideIn 0.5s ease-out forwards;
+}
+
+.animate-tabScale {
+  animation: tabScale 0.5s ease-out forwards;
 }
 
 /* Dynamic delay classes for points */

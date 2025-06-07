@@ -5,6 +5,7 @@ import AttitudeChart from '@/app/ui/dashboard/attitude-chart';
 import AttitudeFrequency from '@/app/ui/dashboard/attitude-frequency';
 import DemographicsCharts from '@/app/ui/dashboard/demographics-chart';
 import ProductsTable from '@/app/ui/dashboard/products-table';
+import SpendingHabitatTabs from '@/app/ui/dashboard/spending-habitat-tabs';
 
 // Animation variants for the heading (word-by-word)
 const headingVariants = {
@@ -45,6 +46,20 @@ const titleVariants = {
       ease: 'easeOut',
     },
   },
+};
+
+// Animation variants for the tabs
+const tabVariants = {
+  hidden: { opacity: 0, scale: 0.9 },
+  visible: (i: number) => ({
+    opacity: 1,
+    scale: 1,
+    transition: {
+      delay: i * 0.1,
+      duration: 0.5,
+      ease: 'easeOut',
+    },
+  }),
 };
 
 export default function DashboardPage() {
@@ -131,6 +146,17 @@ export default function DashboardPage() {
           </motion.h2>
           <DemographicsCharts />
           <ProductsTable />
+          <div className="h-[10vh]" /> {/* 10% height spacer */}
+          <motion.h2
+            className="text-2xl md:text-3xl font-semibold text-center text-blue-200 mb-6"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+            variants={titleVariants}
+          >
+            Products for Your Frequency Spending Habitat
+          </motion.h2>
+          <SpendingHabitatTabs />
         </div>
       </section>
     </div>
