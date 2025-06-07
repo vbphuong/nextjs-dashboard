@@ -163,6 +163,55 @@ input[type='number']::-webkit-outer-spin-button {
   }
 }
 
+.animate-fadeIn {
+  animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes drawLine {
+  from {
+    stroke-dashoffset: 1000;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes showPoints {
+  from {
+    opacity: 0;
+    transform: scale(0);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-drawLine {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: drawLine 1.5s ease-out forwards;
+}
+
+.animate-showPoints {
+  animation: showPoints 0.3s ease-out forwards;
+}
+
+/* Dynamic delay classes for points */
+.animate-delay-0 { animation-delay: 1.5s; }
+.animate-delay-1 { animation-delay: 1.6s; }
+.animate-delay-2 { animation-delay: 1.7s; }
+.animate-delay-3 { animation-delay: 1.8s; }
+.animate-delay-4 { animation-delay: 1.9s; }
+.animate-delay-5 { animation-delay: 2.0s; }
+.animate-delay-6 { animation-delay: 2.1s; }
+.animate-delay-7 { animation-delay: 2.2s; }
+.animate-delay-8 { animation-delay: 2.3s; }
+.animate-delay-9 { animation-delay: 2.4s; }
+.animate-delay-10 { animation-delay: 2.5s; }
+.animate-delay-11 { animation-delay: 2.6s; }
+
+/* Existing grow animation for AttitudeChart */
 @keyframes grow {
   from {
     transform: scaleY(0);
@@ -170,10 +219,6 @@ input[type='number']::-webkit-outer-spin-button {
   to {
     transform: scaleY(1);
   }
-}
-
-.animate-fadeIn {
-  animation: fadeIn 0.5s ease-out;
 }
 
 .animate-grow {

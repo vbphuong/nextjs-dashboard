@@ -41,6 +41,19 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
+const CustomDot = (props: any) => {
+  const { cx, cy, index, isVisible } = props;
+  return (
+    <circle
+      cx={cx}
+      cy={cy}
+      r={4}
+      fill="#2563EB"
+      className={isVisible ? `animate-showPoints animate-delay-${index}` : ''}
+    />
+  );
+};
+
 export default function AttitudeFrequency() {
   const [isVisible, setIsVisible] = useState(false);
   const chartRef = useRef<HTMLDivElement>(null);
@@ -155,9 +168,9 @@ export default function AttitudeFrequency() {
               type="monotone"
               stroke="#93C5FD"
               strokeWidth={2}
-              dot={{ r: 4, fill: '#2563EB' }}
-              className={isVisible ? 'animate-fadeIn' : ''}
-            />
+              dot={(props) => <CustomDot {...props} />}
+              className={isVisible ? 'animate-drawLine' : ''}
+            />;
           </LineChart>
         </ChartContainer>
       </CardContent>
