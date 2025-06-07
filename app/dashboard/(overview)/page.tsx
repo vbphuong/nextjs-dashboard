@@ -48,20 +48,6 @@ const titleVariants = {
   },
 };
 
-// Animation variants for the tabs
-const tabVariants = {
-  hidden: { opacity: 0, scale: 0.9 },
-  visible: (i: number) => ({
-    opacity: 1,
-    scale: 1,
-    transition: {
-      delay: i * 0.1,
-      duration: 0.5,
-      ease: 'easeOut',
-    },
-  }),
-};
-
 export default function DashboardPage() {
   const headingText = [
     'Focusing',
