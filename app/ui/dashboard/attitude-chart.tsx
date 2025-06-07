@@ -41,7 +41,7 @@ export default function AttitudeChart() {
   return (
     <div className="bg-gray-900/90 backdrop-blur-md text-white p-6 rounded-lg relative overflow-hidden" style={{ minHeight: '400px', position: 'relative' }}>
       <h3 className="text-lg md:text-xl font-semibold tracking-wide z-10 relative mb-4">
-        Attitude Score (Positive/Negative) in Mekong Delta Provinces
+        Attitude Score in 12 different Mekong Delta Provinces
       </h3>
       
       <div className="absolute inset-0 z-0">
