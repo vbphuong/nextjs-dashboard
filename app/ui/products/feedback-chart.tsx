@@ -155,7 +155,7 @@ export function FeedbackChart() {
         </Select>
       </CardHeader>
       <CardContent className="px-2 pt-4 sm:px-6 sm:pt-6 overflow-hidden">
-        <div style={{ width: '100%', height: '250px' }}>
+        <div style={{ width: '100%', maxWidth: '100%', height: '250px', overflow: 'hidden' }}>
           <AreaChart
             height={250}
             width={chartWidth || 400} // Fallback width if chartWidth is 0
