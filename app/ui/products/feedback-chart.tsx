@@ -102,6 +102,14 @@ const chartData = [
 
 export function FeedbackChart() {
   const [timeRange, setTimeRange] = React.useState("90d");
+  const [chartWidth, setChartWidth] = React.useState(0);
+
+  React.useEffect(() => {
+    const handleResize = () => setChartWidth(window.innerWidth - 256); // Subtract nav bar width (256px)
+    handleResize(); // Set initial width
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const filteredData = chartData.filter((item) => {
     const date = new Date(item.date);
@@ -150,7 +158,7 @@ export function FeedbackChart() {
         <div style={{ width: '100%', height: '250px' }}>
           <AreaChart
             height={250}
-            width={window.innerWidth - 256} // Subtract nav bar width (256px) from window width
+            width={chartWidth || 500} // Fallback width if chartWidth is 0
             data={filteredData}
             margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
           >
