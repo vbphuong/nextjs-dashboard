@@ -154,7 +154,7 @@ export function FeedbackChart() {
           </SelectContent>
         </Select>
       </CardHeader>
-      <CardContent className="px-2 pt-4 sm:px-6 sm:pt-6">
+      <CardContent className="px-2 pt-4 sm:px-6 sm:pt-6 overflow-hidden">
         <div style={{ width: '100%', height: '250px' }}>
           <AreaChart
             height={250}
