@@ -19,9 +19,9 @@ const cardVariants = {
 export default function HighlightedProducts() {
   // Podium data for top 3
   const topThree = [
-    { rank: 1, name: 'Mekong Rice', score: 2043, color: 'bg-green-900' },
-    { rank: 2, name: 'Delta Shrimp', score: 1800, color: 'bg-green-900' },
-    { rank: 3, name: 'Floating Market Fish', score: 1500, color: 'bg-green-900' },
+    { rank: 2, name: 'Delta Shrimp', score: 1800, color: 'bg-gray-400' },
+    { rank: 1, name: 'Mekong Rice', score: 2043, color: 'bg-yellow-500' },
+    { rank: 3, name: 'Floating Market Fish', score: 1500, color: 'bg-orange-600' },
   ];
 
   // Table data for top 4 to 10
@@ -51,7 +51,7 @@ export default function HighlightedProducts() {
         {topThree.map((item, index) => (
           <motion.div
             key={index}
-            className={`w-32 h-48 flex flex-col items-center justify-end bg-blue-400 rounded-lg p-4 ${index === 1 ? 'h-64' : ''}`} // Middle (1st) is taller
+            className={`w-60 h-48 flex flex-col items-center justify-end bg-blue-400 rounded-lg p-4 ${index === 1 ? 'h-64' : ''}`} // Middle (1st) is taller
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.2 }}
