@@ -150,6 +150,7 @@ export function FeedbackChart() {
         <div style={{ width: '100%', height: '250px' }}>
           <AreaChart
             height={250}
+            width={window.innerWidth - 256} // Subtract nav bar width (256px) from window width
             data={filteredData}
             margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
           >
