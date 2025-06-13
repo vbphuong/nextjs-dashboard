@@ -158,7 +158,7 @@ export function FeedbackChart() {
         <div style={{ width: '100%', height: '250px' }}>
           <AreaChart
             height={250}
-            width={chartWidth || 500} // Fallback width if chartWidth is 0
+            width={chartWidth || 400} // Fallback width if chartWidth is 0
             data={filteredData}
             margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
           >
