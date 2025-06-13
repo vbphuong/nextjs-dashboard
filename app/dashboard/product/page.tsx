@@ -1,7 +1,8 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import {FeedbackChart} from '@/app/ui/products/feedback-chart';
+import { FeedbackChart } from '@/app/ui/products/feedback-chart';
+import HighlightedProducts from '@/app/ui/products/highlighted-products';
 
 // Animation variants for the heading (word-by-word)
 const headingVariants = {
@@ -126,6 +127,9 @@ export default function FeedbackDashboardPage() {
           <FeedbackChart />
         </div>
       </section>
+
+      {/* Highlighted Products Section */}
+      <HighlightedProducts />
     </div>
   );
 }
