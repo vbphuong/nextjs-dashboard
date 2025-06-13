@@ -1,95 +1,184 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { useState, useEffect, useRef } from 'react';
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/ui/table';
 
-// Animation variants for the cards (fade-in together)
-const cardVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.5,
-      ease: 'easeOut',
-      delay: 0.8,
-    },
+const products = [
+  {
+    product: 'Rice Seeds',
+    age: '30-50',
+    income: '1000-3000$',
+    region: 'South',
+    gender: 'Male',
   },
-};
+  {
+    product: 'Fertilizers',
+    age: '50-70',
+    income: '0-1000$',
+    region: 'South',
+    gender: 'Male',
+  },
+  {
+    product: 'Aquaculture Feed',
+    age: '30-50',
+    income: '3000-5000$',
+    region: 'South',
+    gender: 'Female',
+  },
+  {
+    product: 'Farm Tools',
+    age: '19-30',
+    income: '0-1000$',
+    region: 'Middle',
+    gender: 'Male',
+  },
+  {
+    product: 'Pesticides',
+    age: '30-50',
+    income: '1000-3000$',
+    region: 'North',
+    gender: 'Male',
+  },
+  {
+    product: 'Fish Nets',
+    age: '50-70',
+    income: '1000-3000$',
+    region: 'South',
+    gender: 'Female',
+  },
+  {
+    product: 'Irrigation Pumps',
+    age: '30-50',
+    income: '5000$+',
+    region: 'South',
+    gender: 'Male',
+  },
+];
 
-export default function HighlightedProducts() {
-  // Podium data for top 3
-  const topThree = [
-    { rank: 1, name: 'Mekong Rice', score: 2043, color: 'bg-green-900' },
-    { rank: 2, name: 'Delta Shrimp', score: 1800, color: 'bg-green-900' },
-    { rank: 3, name: 'Floating Market Fish', score: 1500, color: 'bg-green-900' },
-  ];
+export default function ProductsTable() {
+  const [filters, setFilters] = useState({
+    age: 'All',
+    income: 'All',
+    region: 'All',
+    gender: 'All',
+  });
+  const [isVisible, setIsVisible] = useState(false);
+  const tableRef = useRef<HTMLDivElement>(null);
 
-  // Table data for top 4 to 10
-  const topFourToTen = [
-    { rank: 4, name: 'Coconut Candy', sales: 900, priceChange: '+2%', rating: 4.0 },
-    { rank: 5, name: 'Mekong Mango', sales: 850, priceChange: '+1%', rating: 4.1 },
-    { rank: 6, name: 'Rice Noodles', sales: 800, priceChange: '-1%', rating: 3.9 },
-    { rank: 7, name: 'Aquatic Herbs', sales: 750, priceChange: '+3%', rating: 4.2 },
-    { rank: 8, name: 'Delta Lotus', sales: 700, priceChange: '-2%', rating: 4.0 },
-    { rank: 9, name: 'Fish Sauce', sales: 650, priceChange: '+4%', rating: 4.1 },
-    { rank: 10, name: 'Paddy Straw', sales: 600, priceChange: '+1%', rating: 3.8 },
-  ];
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.2 }
+    );
+
+    if (tableRef.current) {
+      observer.observe(tableRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  const handleFilterChange = (key: string, value: string) => {
+    setFilters((prev) => ({ ...prev, [key]: value }));
+  };
+
+  const filteredProducts = products.filter((product) => {
+    return (
+      (filters.age === 'All' || product.age === filters.age) &&
+      (filters.income === 'All' || product.income === filters.income) &&
+      (filters.region === 'All' || product.region === filters.region) &&
+      (filters.gender === 'All' || product.gender === filters.gender)
+    );
+  });
 
   return (
-    <section className="flex flex-col items-center justify-start py-10 w-full max-w-7xl px-4">
-      <motion.h2
-        className="text-2xl md:text-3xl font-semibold text-center text-blue-200 mb-6"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
-        variants={cardVariants}
-      >
-        Những sản phẩm nổi bật mùa này
-      </motion.h2>
-      {/* Podium for Top 3 */}
-      <div className="flex justify-center gap-8 mb-10">
-        {topThree.map((item, index) => (
-          <motion.div
-            key={index}
-            className={`w-40 h-64 flex flex-col items-center justify-end bg-green-900 rounded-lg p-4 ${index === 1 ? 'order-2' : index === 0 ? 'order-1' : 'order-3'}`} // Center top 1, adjust width
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
-            variants={cardVariants}
-          >
-            <div className={`w-20 h-20 ${item.color} rounded-full flex items-center justify-center mb-2`}>
-              <span className="text-white font-bold text-2xl">{item.rank}</span>
-            </div>
-            <p className="text-white text-center text-lg">{item.name}</p>
-            <p className="text-white text-center">{item.score} out of 3</p>
-          </motion.div>
-        ))}
+    <div ref={tableRef} className="bg-gray-900/90 backdrop-blur-md p-6 rounded-lg mt-6">
+      <div className="mb-4 flex flex-col sm:flex-row gap-4">
+        <select
+          className="bg-gray-800 text-white border border-gray-700 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+          value={filters.age}
+          onChange={(e) => handleFilterChange('age', e.target.value)}
+        >
+          <option value="All">All Ages</option>
+          <option value="0-18">0-18</option>
+          <option value="19-30">19-30</option>
+          <option value="30-50">30-50</option>
+          <option value="50-70">50-70</option>
+          <option value="70+">70+</option>
+        </select>
+        <select
+          className="bg-gray-800 text-white border border-gray-700 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+          value={filters.income}
+          onChange={(e) => handleFilterChange('income', e.target.value)}
+        >
+          <option value="All">All Incomes</option>
+          <option value="0-1000$">0-1000$</option>
+          <option value="1000-3000$">1000-3000$</option>
+          <option value="3000-5000$">3000-5000$</option>
+          <option value="5000$+">5000$+</option>
+        </select>
+        <select
+          className="bg-gray-800 text-white border border-gray-700 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+          value={filters.region}
+          onChange={(e) => handleFilterChange('region', e.target.value)}
+        >
+          <option value="All">All Regions</option>
+          <option value="North">North</option>
+          <option value="South">South</option>
+          <option value="Middle">Middle</option>
+          <option value="Foreign">Foreign</option>
+        </select>
+        <select
+          className="bg-gray-800 text-white border border-gray-700 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+          value={filters.gender}
+          onChange={(e) => handleFilterChange('gender', e.target.value)}
+        >
+          <option value="All">All Genders</option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+          <option value="Different">Different</option>
+        </select>
       </div>
-      {/* Table for Top 4 to 10 */}
-      <div className="w-full overflow-x-auto">
-        <table className="w-full text-white bg-gray-900/80 border border-gray-700 rounded-lg">
-          <thead>
-            <tr className="bg-gray-800">
-              <th className="px-4 py-2 border-b border-gray-700 text-blue-400">Rank</th>
-              <th className="px-4 py-2 border-b border-gray-700 text-blue-400">Name</th>
-              <th className="px-4 py-2 border-b border-gray-700 text-blue-400">Sales</th>
-              <th className="px-4 py-2 border-b border-gray-700 text-blue-400">Price Change</th>
-              <th className="px-4 py-2 border-b border-gray-700 text-blue-400">Rating</th>
-            </tr>
-          </thead>
-          <tbody>
-            {topFourToTen.map((item, index) => (
-              <tr key={index} className="hover:bg-gray-700 border-b border-gray-700">
-                <td className="px-4 py-2 text-center font-medium text-white">{item.rank}</td>
-                <td className="px-4 py-2 text-gray-200">{item.name}</td>
-                <td className="px-4 py-2 text-center text-gray-200">{item.sales}</td>
-                <td className="px-4 py-2 text-center text-gray-200">{item.priceChange}</td>
-                <td className="px-4 py-2 text-center text-gray-200">{item.rating}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </section>  
+      <Table>
+        <TableCaption className="text-gray-200">Products commonly purchased by customer groups in Mekong Delta</TableCaption>
+        <TableHeader>
+          <TableRow className="border-b border-gray-700">
+            <TableHead className="w-[200px] text-blue-400">Product</TableHead>
+            <TableHead className="text-blue-400">Age</TableHead>
+            <TableHead className="text-blue-400">Income</TableHead>
+            <TableHead className="text-blue-400">Region</TableHead>
+            <TableHead className="text-blue-400">Gender</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {filteredProducts.map((product, index) => (
+            <TableRow
+              key={product.product}
+              className={`border-b border-gray-700 ${isVisible ? 'animate-slideIn' : ''}`}
+              style={{ animationDelay: `${index * 0.1}s` }}
+            >
+              <TableCell className="font-medium text-white">{product.product}</TableCell>
+              <TableCell className="text-gray-200">{product.age}</TableCell>
+              <TableCell className="text-gray-200">{product.income}</TableCell>
+              <TableCell className="text-gray-200">{product.region}</TableCell>
+              <TableCell className="text-gray-200">{product.gender}</TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </div>
   );
 }
