@@ -51,7 +51,7 @@ export default function HighlightedProducts() {
         {topThree.map((item, index) => (
           <motion.div
             key={index}
-            className={`w-60 h-48 flex flex-col items-center justify-end bg-blue-400 rounded-lg p-4 ${index === 1 ? 'h-64' : ''}`} // Middle (1st) is taller
+            className={`w-60 h-48 flex flex-col items-center justify-end bg-blue-900 rounded-lg p-4 ${index === 1 ? 'h-64' : ''}`} // Middle (1st) is taller
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.2 }}
