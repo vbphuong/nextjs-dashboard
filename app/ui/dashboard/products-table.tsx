@@ -90,6 +90,6 @@ export default function HighlightedProducts() {
           </tbody>
         </table>
       </div>
-    </section>
+    </section>  
   );
 }
