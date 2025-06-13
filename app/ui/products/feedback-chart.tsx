@@ -118,7 +118,7 @@ export function FeedbackChart() {
   });
 
   return (
-    <Card className="pt-0 bg-gray-900/80 text-white border-gray-700">
+    <Card className="pt-0 bg-gray-900/80 text-white border-gray-700 w-full">
       <CardHeader className="flex items-center gap-2 space-y-0 border-b border-gray-700 py-5 sm:flex-row">
         <div className="grid flex-1 gap-1">
           <CardTitle className="text-blue-200">Feedback Score - Interactive</CardTitle>
@@ -147,69 +147,71 @@ export function FeedbackChart() {
         </Select>
       </CardHeader>
       <CardContent className="px-2 pt-4 sm:px-6 sm:pt-6">
-        <AreaChart
-          width={730}
-          height={250}
-          data={filteredData}
-          margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
-        >
-          <defs>
-            <linearGradient id="fillProvider" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="5%" stopColor="#22C55E" stopOpacity={0.8} />
-              <stop offset="95%" stopColor="#22C55E" stopOpacity={0.1} />
-            </linearGradient>
-            <linearGradient id="fillConsumer" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="5%" stopColor="#60A5FA" stopOpacity={0.8} />
-              <stop offset="95%" stopColor="#60A5FA" stopOpacity={0.1} />
-            </linearGradient>
-          </defs>
-          <CartesianGrid vertical={false} stroke="rgba(255, 255, 255, 0.1)" />
-          <XAxis
-            dataKey="date"
-            tickLine={false}
-            axisLine={false}
-            tickMargin={8}
-            minTickGap={32}
-            tickFormatter={(value) => {
-              const date = new Date(value);
-              return date.toLocaleDateString("en-US", {
-                month: "short",
-                day: "numeric",
-              });
-            }}
-            stroke="#D1D5DB"
-          />
-          <YAxis
-            tickFormatter={(value) => value.toFixed(1)}
-            stroke="#D1D5DB"
-            domain={[3, 5]}
-          />
-          <Tooltip
-            contentStyle={{ backgroundColor: '#1F2937', color: '#fff', border: '1px solid #4B5563' }}
-            formatter={(value: number) => value.toFixed(1)}
-            labelFormatter={(value) => {
-              return new Date(value).toLocaleDateString("en-US", {
-                month: "short",
-                day: "numeric",
-              });
-            }}
-          />
-          <Legend wrapperStyle={{ color: '#BFDBFE' }} />
-          <Area
-            type="natural"
-            dataKey="consumer"
-            stackId="a"
-            stroke="#60A5FA"
-            fill="url(#fillConsumer)"
-          />
-          <Area
-            type="natural"
-            dataKey="provider"
-            stackId="a"
-            stroke="#22C55E"
-            fill="url(#fillProvider)"
-          />
-        </AreaChart>
+        <div style={{ width: '100%', height: '250px' }}>
+          <AreaChart
+            height={250}
+            data={filteredData}
+            margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
+          >
+            <defs>
+              <linearGradient id="fillProvider" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="5%" stopColor="#22C55E" stopOpacity={0.8} />
+                <stop offset="95%" stopColor="#22C55E" stopOpacity={0.1} />
+              </linearGradient>
+              <linearGradient id="fillConsumer" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="5%" stopColor="#60A5FA" stopOpacity={0.8} />
+                <stop offset="95%" stopColor="#60A5FA" stopOpacity={0.1} />
+              </linearGradient>
+            </defs>
+            <CartesianGrid vertical={false} stroke="rgba(255, 255, 255, 0.1)" />
+            <XAxis
+              dataKey="date"
+              tickLine={false}
+              axisLine={false}
+              tickMargin={8}
+              minTickGap={32}
+              tickFormatter={(value) => {
+                const date = new Date(value);
+                return date.toLocaleDateString("en-US", {
+                  month: "short",
+                  day: "numeric",
+                });
+              }}
+              stroke="#D1D5DB"
+              interval="preserveStartEnd"
+            />
+            <YAxis
+              tickFormatter={(value) => value.toFixed(1)}
+              stroke="#D1D5DB"
+              domain={[3, 5]}
+            />
+            <Tooltip
+              contentStyle={{ backgroundColor: '#1F2937', color: '#fff', border: '1px solid #4B5563' }}
+              formatter={(value: number) => value.toFixed(1)}
+              labelFormatter={(value) => {
+                return new Date(value).toLocaleDateString("en-US", {
+                  month: "short",
+                  day: "numeric",
+                });
+              }}
+            />
+            <Legend wrapperStyle={{ color: '#BFDBFE' }} />
+            <Area
+              type="natural"
+              dataKey="consumer"
+              stackId="a"
+              stroke="#60A5FA"
+              fill="url(#fillConsumer)"
+            />
+            <Area
+              type="natural"
+              dataKey="provider"
+              stackId="a"
+              stroke="#22C55E"
+              fill="url(#fillProvider)"
+            />
+          </AreaChart>
+        </div>
       </CardContent>
     </Card>
   );
