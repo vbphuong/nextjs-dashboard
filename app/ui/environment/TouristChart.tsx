@@ -19,23 +19,23 @@ import {
 import { motion } from 'framer-motion';
 
 const chartData = [
-  { month: 'Jan', waterLevel: 15500 },
-  { month: 'Feb', waterLevel: 16000 },
-  { month: 'Mar', waterLevel: 18000 },
-  { month: 'Apr', waterLevel: 20000 },
-  { month: 'May', waterLevel: 22000 },
-  { month: 'Jun', waterLevel: 23500 },
-  { month: 'Jul', waterLevel: 22500 },
-  { month: 'Aug', waterLevel: 21000 },
-  { month: 'Sep', waterLevel: 19500 },
-  { month: 'Oct', waterLevel: 18000 },
-  { month: 'Nov', waterLevel: 16500 },
-  { month: 'Dec', waterLevel: 15500 },
+  { month: 'Jan', tourists: 15500 },
+  { month: 'Feb', tourists: 16000 },
+  { month: 'Mar', tourists: 18000 },
+  { month: 'Apr', tourists: 20000 },
+  { month: 'May', tourists: 22000 },
+  { month: 'Jun', tourists: 23500 },
+  { month: 'Jul', tourists: 22500 },
+  { month: 'Aug', tourists: 21000 },
+  { month: 'Sep', tourists: 19500 },
+  { month: 'Oct', tourists: 18000 },
+  { month: 'Nov', tourists: 16500 },
+  { month: 'Dec', tourists: 15500 },
 ];
 
 const chartConfig = {
-  waterLevel: {
-    label: 'Water Level',
+  tourists: {
+    label: 'Tourists',
     color: '#22c55e',
   },
 } satisfies ChartConfig;
@@ -52,7 +52,7 @@ const cardVariants = {
   },
 };
 
-export default function WaterLevelChart() {
+export default function TouristChart() {
   return (
     <motion.div
       className="w-full"
@@ -64,7 +64,7 @@ export default function WaterLevelChart() {
       <Card className="bg-gray-900/80 border-gray-700">
         <CardHeader>
           <CardTitle>Line Chart</CardTitle>
-          <CardDescription>Monthly Water Levels in Mekong Delta (2025)</CardDescription>
+          <CardDescription>Monthly Tourists in Mekong Delta (2025)</CardDescription>
         </CardHeader>
         <CardContent>
           <ChartContainer config={chartConfig}>
@@ -87,7 +87,7 @@ export default function WaterLevelChart() {
                 content={<ChartTooltipContent hideLabel />}
               />
               <Line
-                dataKey="waterLevel"
+                dataKey="tourists"
                 type="natural"
                 stroke="#22c55e"
                 strokeWidth={2}
@@ -101,7 +101,7 @@ export default function WaterLevelChart() {
             Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
           </div>
           <div className="text-muted-foreground leading-none">
-            Showing water levels for the last year
+            Showing tourists for the last year
           </div>
         </CardFooter>
       </Card>
