@@ -32,7 +32,7 @@ const chartConfig = {
   },
   rainfall: {
     label: 'Rainfall (mm)',
-    color: '#22c55e',
+    color: '#93c5fd',
   },
 } satisfies ChartConfig;
 
@@ -59,8 +59,8 @@ export default function EnvironmentChart() {
     >
       <Card className="bg-gray-900/80 border-gray-700">
         <CardHeader>
-          <CardTitle>Line Chart - Multiple</CardTitle>
-          <CardDescription>Seasons 2025</CardDescription>
+          <CardTitle className="text-white">Line Chart - Multiple</CardTitle>
+          <CardDescription className="text-white">Seasons 2025</CardDescription>
         </CardHeader>
         <CardContent>
           <ChartContainer config={chartConfig}>
@@ -74,7 +74,7 @@ export default function EnvironmentChart() {
               <CartesianGrid vertical={false} stroke="#d1d5db" />
               <XAxis dataKey="season" tickLine={false} axisLine={false} tickMargin={8} stroke="#d1d5db" />
               <YAxis yAxisId="left" orientation="left" stroke="#ff4444" domain={[26, 32]} />
-              <YAxis yAxisId="right" orientation="right" stroke="#22c55e" domain={[0, 140]} />
+              <YAxis yAxisId="right" orientation="right" stroke="#93c5fd" domain={[0, 140]} />
               <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
               <Line
                 yAxisId="left"
@@ -88,7 +88,7 @@ export default function EnvironmentChart() {
                 yAxisId="right"
                 dataKey="rainfall"
                 type="monotone"
-                stroke="#22c55e"
+                stroke="#93c5fd"
                 strokeWidth={2}
                 dot={{ r: 6 }}
               />
@@ -98,10 +98,10 @@ export default function EnvironmentChart() {
         <CardFooter>
           <div className="flex w-full items-start gap-2 text-sm">
             <div className="grid gap-2">
-              <div className="flex items-center gap-2 leading-none font-medium">
-                Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
+              <div className="flex items-center gap-2 leading-none font-medium text-white">
+                Trending up by 5.2% this month <TrendingUp className="h-4 w-4 text-white" />
               </div>
-              <div className="text-muted-foreground flex items-center gap-2 leading-none">
+              <div className="text-muted-foreground flex items-center gap-2 leading-none text-white">
                 Showing weather trends for the last year
               </div>
             </div>
