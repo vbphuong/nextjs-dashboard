@@ -30,50 +30,50 @@ import {
 type PriceData = { date: string; price: number; fill: string }[];
 const productData: Record<string, PriceData> = {
   'Mekong Rice': [
-    { date: '2025-06-01', price: 50, fill: 'var(--color-light-blue)' },
-    { date: '2025-06-02', price: 52, fill: 'var(--color-light-blue)' },
-    { date: '2025-06-03', price: 51, fill: 'var(--color-light-blue)' },
-    { date: '2025-06-04', price: 53, fill: 'var(--color-light-blue)' },
-    { date: '2025-06-05', price: 54, fill: 'var(--color-light-blue)' },
-    { date: '2025-06-06', price: 53, fill: 'var(--color-light-blue)' },
-    { date: '2025-06-07', price: 55, fill: 'var(--color-light-blue)' },
+    { date: '2025-06-01', price: 50, fill: '#93c5fd' },
+    { date: '2025-06-02', price: 52, fill: '#93c5fd' },
+    { date: '2025-06-03', price: 51, fill: '#93c5fd' },
+    { date: '2025-06-04', price: 53, fill: '#93c5fd' },
+    { date: '2025-06-05', price: 54, fill: '#93c5fd' },
+    { date: '2025-06-06', price: 53, fill: '#93c5fd' },
+    { date: '2025-06-07', price: 55, fill: '#93c5fd' },
   ],
   'Delta Shrimp': [
-    { date: '2025-06-01', price: 120, fill: 'var(--color-light-blue)' },
-    { date: '2025-06-02', price: 122, fill: 'var(--color-light-blue)' },
-    { date: '2025-06-03', price: 121, fill: 'var(--color-light-blue)' },
-    { date: '2025-06-04', price: 123, fill: 'var(--color-light-blue)' },
-    { date: '2025-06-05', price: 125, fill: 'var(--color-light-blue)' },
-    { date: '2025-06-06', price: 124, fill: 'var(--color-light-blue)' },
-    { date: '2025-06-07', price: 126, fill: 'var(--color-light-blue)' },
+    { date: '2025-06-01', price: 120, fill: '#93c5fd' },
+    { date: '2025-06-02', price: 122, fill: '#93c5fd' },
+    { date: '2025-06-03', price: 121, fill: '#93c5fd' },
+    { date: '2025-06-04', price: 123, fill: '#93c5fd' },
+    { date: '2025-06-05', price: 125, fill: '#93c5fd' },
+    { date: '2025-06-06', price: 124, fill: '#93c5fd' },
+    { date: '2025-06-07', price: 126, fill: '#93c5fd' },
   ],
   'Floating Market Fish': [
-    { date: '2025-06-01', price: 80, fill: 'var(--color-light-blue)' },
-    { date: '2025-06-02', price: 82, fill: 'var(--color-light-blue)' },
-    { date: '2025-06-03', price: 81, fill: 'var(--color-light-blue)' },
-    { date: '2025-06-04', price: 83, fill: 'var(--color-light-blue)' },
-    { date: '2025-06-05', price: 85, fill: 'var(--color-light-blue)' },
-    { date: '2025-06-06', price: 84, fill: 'var(--color-light-blue)' },
-    { date: '2025-06-07', price: 86, fill: 'var(--color-light-blue)' },
+    { date: '2025-06-01', price: 80, fill: '#93c5fd' },
+    { date: '2025-06-02', price: 82, fill: '#93c5fd' },
+    { date: '2025-06-03', price: 81, fill: '#93c5fd' },
+    { date: '2025-06-04', price: 83, fill: '#93c5fd' },
+    { date: '2025-06-05', price: 85, fill: '#93c5fd' },
+    { date: '2025-06-06', price: 84, fill: '#93c5fd' },
+    { date: '2025-06-07', price: 86, fill: '#93c5fd' },
   ],
 };
 
 const chartConfig = {
   price: {
     label: 'Price',
-    color: 'var(--color-light-blue)',
+    color: '#93c5fd',
   },
   'Mekong Rice': {
     label: 'Mekong Rice',
-    color: 'var(--color-light-blue)',
+    color: '#93c5fd',
   },
   'Delta Shrimp': {
     label: 'Delta Shrimp',
-    color: 'var(--color-light-blue)',
+    color: '#93c5fd',
   },
   'Floating Market Fish': {
     label: 'Floating Market Fish',
-    color: 'var(--color-light-blue)',
+    color: '#93c5fd',
   },
 } satisfies ChartConfig;
 
@@ -132,17 +132,17 @@ export default function PriceTrends() {
               data={productData[selectedProduct]}
               margin={{ top: 24, left: 24, right: 24 }}
             >
-              <CartesianGrid vertical={false} stroke="var(--color-gray-white)" />
-              <XAxis dataKey="date" stroke="var(--color-gray-white)" />
-              <YAxis stroke="var(--color-gray-white)" />
+              <CartesianGrid vertical={false} stroke="#d1d5db" />
+              <XAxis dataKey="date" stroke="#d1d5db" />
+              <YAxis stroke="#d1d5db" />
               <ChartTooltip
-                cursor={false}
+                cursor={{ stroke: '#93c5fd', strokeWidth: 1 }}
                 content={<ChartTooltipContent indicator="line" nameKey="price" hideLabel />}
               />
               <Line
                 dataKey="price"
                 type="natural"
-                stroke="var(--color-light-blue)"
+                stroke="#93c5fd"
                 strokeWidth={2}
                 dot={({ payload, ...props }) => (
                   <Dot
