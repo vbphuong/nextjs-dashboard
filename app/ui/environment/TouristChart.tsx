@@ -101,7 +101,7 @@ export default function TouristChart() {
             Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
           </div>
           <div className="text-muted-foreground leading-none">
-            Showing tourists for the last year
+            Showing tourists for the last year 
           </div>
         </CardFooter>
       </Card>
