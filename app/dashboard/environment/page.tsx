@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import EnvironmentChart from '@/app/ui/environment/EnvironmentChart';
+import WaterLevelChart from '@/app/ui/environment/WaterLevelChart';
 
 // Animation variants for the heading (word-by-word)
 const headingVariants = {
@@ -102,6 +103,7 @@ export default function EnvironmentPage() {
       <section className="flex flex-col items-center justify-start py-10">
         <div className="w-full max-w-7xl px-4">
           <EnvironmentChart />
+          <WaterLevelChart />
         </div>
       </section>
     </div>
