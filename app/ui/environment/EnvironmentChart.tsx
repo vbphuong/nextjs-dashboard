@@ -1,20 +1,40 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { TrendingUp } from 'lucide-react';
 import {
   Card,
   CardContent,
+  CardDescription,
+  CardFooter,
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
+import {
+  ChartConfig,
+  ChartContainer,
+  ChartTooltip,
+  ChartTooltipContent,
+} from '@/components/ui/chart';
+import { CartesianGrid, Line, LineChart, XAxis } from 'recharts';
+import { motion } from 'framer-motion';
 
 const chartData = [
-  { season: 'Spring', temp: 27.5, rainfall: -40 },
-  { season: 'Summer', temp: 31.8, rainfall: -120 },
-  { season: 'Fall', temp: 30.2, rainfall: -100 },
-  { season: 'Winter', temp: 26.3, rainfall: -60 },
+  { season: 'Spring', temp: 27.5, rainfall: 40 },
+  { season: 'Summer', temp: 31.8, rainfall: 120 },
+  { season: 'Fall', temp: 30.2, rainfall: 100 },
+  { season: 'Winter', temp: 26.3, rainfall: 60 },
 ];
+
+const chartConfig = {
+  temp: {
+    label: 'Temperature (°C)',
+    color: 'var(--chart-1)',
+  },
+  rainfall: {
+    label: 'Rainfall (mm)',
+    color: 'var(--chart-2)',
+  },
+} satisfies ChartConfig;
 
 const cardVariants = {
   hidden: { opacity: 0, y: 20 },
@@ -39,44 +59,56 @@ export default function EnvironmentChart() {
     >
       <Card className="bg-gray-900/80 border-gray-700">
         <CardHeader>
-          <CardTitle className="text-white text-2xl">Average Weather Trends in Mekong Delta</CardTitle>
+          <CardTitle>Line Chart - Multiple</CardTitle>
+          <CardDescription>Seasons 2025</CardDescription>
         </CardHeader>
         <CardContent>
-          <LineChart
-            width={600}
-            height={300}
-            data={chartData}
-            margin={{ top: 20, right: 30, left: 20, bottom: 20 }}
-          >
-            <CartesianGrid strokeDasharray="3 3" stroke="#d1d5db" />
-            <XAxis dataKey="season" stroke="#d1d5db" />
-            <YAxis yAxisId="left" orientation="left" stroke="#ff4444" domain={[26, 32]} />
-            <YAxis yAxisId="right" orientation="right" stroke="#3b82f6" domain={[-140, 0]} />
-            <Tooltip
-              contentStyle={{ backgroundColor: '#1f2937', color: '#d1d5db', border: '1px solid #4b5563' }}
-              itemStyle={{ color: '#d1d5db' }}
-            />
-            <Legend wrapperStyle={{ color: '#d1d5db' }} />
-            <Line
-              yAxisId="left"
-              type="monotone"
-              dataKey="temp"
-              stroke="#ff4444"
-              strokeWidth={2}
-              dot={{ r: 6 }}
-              activeDot={{ r: 8 }}
-            />
-            <Line
-              yAxisId="right"
-              type="monotone"
-              dataKey="rainfall"
-              stroke="#3b82f6"
-              strokeWidth={2}
-              dot={{ r: 6 }}
-              activeDot={{ r: 8 }}
-            />
-          </LineChart>
+          <ChartContainer config={chartConfig}>
+            <LineChart
+              accessibilityLayer
+              data={chartData}
+              margin={{ left: 12, right: 12 }}
+              width={600}
+              height={300}
+            >
+              <CartesianGrid vertical={false} />
+              <XAxis
+                dataKey="season"
+                tickLine={false}
+                axisLine={false}
+                tickMargin={8}
+                tickFormatter={(value) => value.slice(0, 3)}
+              />
+              <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
+              <Line
+                dataKey="temp"
+                type="monotone"
+                stroke="var(--color-temp)"
+                strokeWidth={2}
+                dot={false}
+              />
+              <Line
+                dataKey="rainfall"
+                type="monotone"
+                stroke="var(--color-rainfall)"
+                strokeWidth={2}
+                dot={false}
+              />
+            </LineChart>
+          </ChartContainer>
         </CardContent>
+        <CardFooter>
+          <div className="flex w-full items-start gap-2 text-sm">
+            <div className="grid gap-2">
+              <div className="flex items-center gap-2 leading-none font-medium">
+                Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
+              </div>
+              <div className="text-muted-foreground flex items-center gap-2 leading-none">
+                Showing weather trends for the last year
+              </div>
+            </div>
+          </div>
+        </CardFooter>
       </Card>
     </motion.div>
   );
