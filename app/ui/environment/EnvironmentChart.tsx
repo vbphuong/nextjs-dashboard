@@ -15,7 +15,7 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from '@/components/ui/chart';
-import { CartesianGrid, Line, LineChart, XAxis } from 'recharts';
+import { CartesianGrid, Line, LineChart, XAxis, YAxis } from 'recharts';
 import { motion } from 'framer-motion';
 
 const chartData = [
@@ -28,11 +28,11 @@ const chartData = [
 const chartConfig = {
   temp: {
     label: 'Temperature (°C)',
-    color: 'var(--chart-1)',
+    color: '#ff4444',
   },
   rainfall: {
     label: 'Rainfall (mm)',
-    color: 'var(--chart-2)',
+    color: '#22c55e',
   },
 } satisfies ChartConfig;
 
@@ -67,32 +67,30 @@ export default function EnvironmentChart() {
             <LineChart
               accessibilityLayer
               data={chartData}
-              margin={{ left: 12, right: 12 }}
+              margin={{ top: 20, right: 30, left: 20, bottom: 20 }}
               width={600}
               height={300}
             >
-              <CartesianGrid vertical={false} />
-              <XAxis
-                dataKey="season"
-                tickLine={false}
-                axisLine={false}
-                tickMargin={8}
-                tickFormatter={(value) => value.slice(0, 3)}
-              />
+              <CartesianGrid vertical={false} stroke="#d1d5db" />
+              <XAxis dataKey="season" tickLine={false} axisLine={false} tickMargin={8} stroke="#d1d5db" />
+              <YAxis yAxisId="left" orientation="left" stroke="#ff4444" domain={[26, 32]} />
+              <YAxis yAxisId="right" orientation="right" stroke="#22c55e" domain={[0, 140]} />
               <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
               <Line
+                yAxisId="left"
                 dataKey="temp"
                 type="monotone"
-                stroke="var(--color-temp)"
+                stroke="#ff4444"
                 strokeWidth={2}
-                dot={false}
+                dot={{ r: 6 }}
               />
               <Line
+                yAxisId="right"
                 dataKey="rainfall"
                 type="monotone"
-                stroke="var(--color-rainfall)"
+                stroke="#22c55e"
                 strokeWidth={2}
-                dot={false}
+                dot={{ r: 6 }}
               />
             </LineChart>
           </ChartContainer>
