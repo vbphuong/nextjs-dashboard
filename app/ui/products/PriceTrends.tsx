@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { motion } from 'framer-motion'; // Added missing import
+import { motion } from 'framer-motion';
 import { TrendingUp } from 'lucide-react';
 import {
   Card,
@@ -17,7 +17,7 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from '@/components/ui/chart';
-import { CartesianGrid, Dot, Line, LineChart } from 'recharts';
+import { CartesianGrid, Dot, Line, LineChart, XAxis, YAxis } from 'recharts';
 import { Input } from '@/components/ui/input';
 import {
   Select,
@@ -27,55 +27,53 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 
-// Define the type for price data
 type PriceData = { date: string; price: number; fill: string }[];
-// Add index signature to productData
 const productData: Record<string, PriceData> = {
   'Mekong Rice': [
-    { date: '2025-06-01', price: 50, fill: 'var(--color-1)' },
-    { date: '2025-06-02', price: 52, fill: 'var(--color-1)' },
-    { date: '2025-06-03', price: 51, fill: 'var(--color-1)' },
-    { date: '2025-06-04', price: 53, fill: 'var(--color-1)' },
-    { date: '2025-06-05', price: 54, fill: 'var(--color-1)' },
-    { date: '2025-06-06', price: 53, fill: 'var(--color-1)' },
-    { date: '2025-06-07', price: 55, fill: 'var(--color-1)' },
+    { date: '2025-06-01', price: 50, fill: 'var(--color-light-blue)' },
+    { date: '2025-06-02', price: 52, fill: 'var(--color-light-blue)' },
+    { date: '2025-06-03', price: 51, fill: 'var(--color-light-blue)' },
+    { date: '2025-06-04', price: 53, fill: 'var(--color-light-blue)' },
+    { date: '2025-06-05', price: 54, fill: 'var(--color-light-blue)' },
+    { date: '2025-06-06', price: 53, fill: 'var(--color-light-blue)' },
+    { date: '2025-06-07', price: 55, fill: 'var(--color-light-blue)' },
   ],
   'Delta Shrimp': [
-    { date: '2025-06-01', price: 120, fill: 'var(--color-2)' },
-    { date: '2025-06-02', price: 122, fill: 'var(--color-2)' },
-    { date: '2025-06-03', price: 121, fill: 'var(--color-2)' },
-    { date: '2025-06-04', price: 123, fill: 'var(--color-2)' },
-    { date: '2025-06-05', price: 125, fill: 'var(--color-2)' },
-    { date: '2025-06-06', price: 124, fill: 'var(--color-2)' },
-    { date: '2025-06-07', price: 126, fill: 'var(--color-2)' },
+    { date: '2025-06-01', price: 120, fill: 'var(--color-light-blue)' },
+    { date: '2025-06-02', price: 122, fill: 'var(--color-light-blue)' },
+    { date: '2025-06-03', price: 121, fill: 'var(--color-light-blue)' },
+    { date: '2025-06-04', price: 123, fill: 'var(--color-light-blue)' },
+    { date: '2025-06-05', price: 125, fill: 'var(--color-light-blue)' },
+    { date: '2025-06-06', price: 124, fill: 'var(--color-light-blue)' },
+    { date: '2025-06-07', price: 126, fill: 'var(--color-light-blue)' },
   ],
   'Floating Market Fish': [
-    { date: '2025-06-01', price: 80, fill: 'var(--color-3)' },
-    { date: '2025-06-02', price: 82, fill: 'var(--color-3)' },
-    { date: '2025-06-03', price: 81, fill: 'var(--color-3)' },
-    { date: '2025-06-04', price: 83, fill: 'var(--color-3)' },
-    { date: '2025-06-05', price: 85, fill: 'var(--color-3)' },
-    { date: '2025-06-06', price: 84, fill: 'var(--color-3)' },
-    { date: '2025-06-07', price: 86, fill: 'var(--color-3)' },
+    { date: '2025-06-01', price: 80, fill: 'var(--color-light-blue)' },
+    { date: '2025-06-02', price: 82, fill: 'var(--color-light-blue)' },
+    { date: '2025-06-03', price: 81, fill: 'var(--color-light-blue)' },
+    { date: '2025-06-04', price: 83, fill: 'var(--color-light-blue)' },
+    { date: '2025-06-05', price: 85, fill: 'var(--color-light-blue)' },
+    { date: '2025-06-06', price: 84, fill: 'var(--color-light-blue)' },
+    { date: '2025-06-07', price: 86, fill: 'var(--color-light-blue)' },
   ],
 };
 
 const chartConfig = {
   price: {
     label: 'Price',
-    color: 'var(--chart-1)',
+    color: 'var(--color-light-blue)',
   },
   'Mekong Rice': {
     label: 'Mekong Rice',
-    color: 'var(--color-1)',
+    color: 'var(--color-light-blue)',
   },
   'Delta Shrimp': {
     label: 'Delta Shrimp',
-    color: 'var(--color-2)',
+    color: 'var(--color-light-blue)',
   },
   'Floating Market Fish': {
     label: 'Floating Market Fish',
-    color: 'var(--color-3)',
+    color: 'var(--color-light-blue)',
   },
 } satisfies ChartConfig;
 
@@ -88,9 +86,9 @@ export default function PriceTrends() {
   );
 
   return (
-    <section className="flex flex-col items-center justify-start py-10 w-full max-w-7xl px-4">
+    <section className="flex flex-col items-center justify-start py-10 w-full max-w-7xl px-4 bg-black text-white">
       <motion.h2
-        className="text-2xl md:text-3xl font-semibold text-center text-blue-200 mb-6"
+        className="text-2xl md:text-3xl font-semibold text-center text-gray-200 mb-6"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}
@@ -122,10 +120,10 @@ export default function PriceTrends() {
           </SelectContent>
         </Select>
       </div>
-      <Card className="w-full">
+      <Card className="w-full bg-gray-900 border-gray-700">
         <CardHeader>
-          <CardTitle>Price Trend - {selectedProduct}</CardTitle>
-          <CardDescription>June 1 - June 7, 2025</CardDescription>
+          <CardTitle className="text-white">Price Trend - {selectedProduct}</CardTitle>
+          <CardDescription className="text-gray-400">June 1 - June 7, 2025</CardDescription>
         </CardHeader>
         <CardContent>
           <ChartContainer config={chartConfig}>
@@ -134,7 +132,9 @@ export default function PriceTrends() {
               data={productData[selectedProduct]}
               margin={{ top: 24, left: 24, right: 24 }}
             >
-              <CartesianGrid vertical={false} />
+              <CartesianGrid vertical={false} stroke="var(--color-gray-white)" />
+              <XAxis dataKey="date" stroke="var(--color-gray-white)" />
+              <YAxis stroke="var(--color-gray-white)" />
               <ChartTooltip
                 cursor={false}
                 content={<ChartTooltipContent indicator="line" nameKey="price" hideLabel />}
@@ -142,7 +142,7 @@ export default function PriceTrends() {
               <Line
                 dataKey="price"
                 type="natural"
-                stroke="var(--color-price)"
+                stroke="var(--color-light-blue)"
                 strokeWidth={2}
                 dot={({ payload, ...props }) => (
                   <Dot
@@ -159,10 +159,10 @@ export default function PriceTrends() {
           </ChartContainer>
         </CardContent>
         <CardFooter className="flex-col items-start gap-2 text-sm">
-          <div className="flex gap-2 leading-none font-medium">
-            Trending up by 5.2% this week <TrendingUp className="h-4 w-4" />
+          <div className="flex gap-2 leading-none font-medium text-gray-200">
+            Trending up by 5.2% this week <TrendingUp className="h-4 w-4 text-green-500" />
           </div>
-          <div className="text-muted-foreground leading-none">
+          <div className="text-gray-400 leading-none">
             Showing price trends for the last 7 days
           </div>
         </CardFooter>
