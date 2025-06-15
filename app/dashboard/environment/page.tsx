@@ -124,6 +124,8 @@ export default function EnvironmentPage() {
             Groups of people based on characteristics
           </motion.h2>
           <EnvironmentChart />
+
+          <div className="h-[10vh]" /> {/* 10% height spacer */}
           <motion.h2
             className="text-2xl md:text-3xl font-semibold text-center text-blue-200 mb-6"
             initial="hidden"
