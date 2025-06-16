@@ -15,7 +15,7 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from '@/components/ui/chart';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const chartData = [
   { date: '2024-04-01', yield: 3400, value: 3200 },
@@ -206,6 +206,8 @@ export function FisheryBarChart() {
             margin={{ left: 12, right: 12 }}
             width={600}
             height={300}
+            barSize={20} // Adjust bar width
+            barGap={5} // Add gap between bars
           >
             <CartesianGrid vertical={false} stroke="#d1d5db" />
             <XAxis
