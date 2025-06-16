@@ -206,8 +206,9 @@ export function FisheryBarChart() {
             margin={{ left: 12, right: 12 }}
             width={600}
             height={300}
-            barSize={20} // Adjust bar width
-            barGap={5} // Add gap between bars
+            barSize={20} // Fixed bar width
+            barCategoryGap={10} // Space between categories (bars)
+            barGap={2} // Space within a category (if multiple bars per category)
           >
             <CartesianGrid vertical={false} stroke="#d1d5db" />
             <XAxis
