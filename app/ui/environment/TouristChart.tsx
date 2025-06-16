@@ -63,7 +63,7 @@ export default function TouristChart() {
     >
       <Card className="bg-gray-900/80 border-gray-700">
         <CardHeader>
-          <CardTitle>Line Chart</CardTitle>
+          <CardTitle className="text-white">Line Chart</CardTitle>
           <CardDescription>Monthly Tourists in Mekong Delta (2025)</CardDescription>
         </CardHeader>
         <CardContent>
@@ -97,7 +97,7 @@ export default function TouristChart() {
           </ChartContainer>
         </CardContent>
         <CardFooter className="flex-col items-start gap-2 text-sm">
-          <div className="flex gap-2 leading-none font-medium">
+          <div className="flex gap-2 leading-none font-medium text-white">
             Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
           </div>
           <div className="text-muted-foreground leading-none">

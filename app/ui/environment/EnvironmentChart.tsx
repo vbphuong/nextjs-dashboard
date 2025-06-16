@@ -60,7 +60,7 @@ export default function EnvironmentChart() {
       <Card className="bg-gray-900/80 border-gray-700">
         <CardHeader>
           <CardTitle className="text-white">Line Chart - Multiple</CardTitle>
-          <CardDescription className="text-white">Seasons 2025</CardDescription>
+          <CardDescription className="text-grey">Seasons 2025</CardDescription>
         </CardHeader>
         <CardContent>
           <ChartContainer config={chartConfig}>

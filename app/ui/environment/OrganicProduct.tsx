@@ -1,5 +1,6 @@
 "use client"
 
+import { TrendingDown } from "lucide-react"
 import { Bar, BarChart, CartesianGrid, XAxis } from "recharts"
 import {
   Card,
@@ -18,39 +19,40 @@ import {
 } from "@/components/ui/chart"
 
 const chartData = [
-  { year: "2010", natural: 60, farmedImported: 40 },
-  { year: "2015", natural: 45, farmedImported: 55 },
-  { year: "2020", natural: 30, farmedImported: 70 },
-  { year: "2025", natural: 20, farmedImported: 80 },
+  { month: "May 2025", natural: 60, farmedImported: 40 },
+  { month: "June 2025", natural: 45, farmedImported: 55 },
+  { month: "July 2025", natural: 30, farmedImported: 70 },
+  { month: "August 2025", natural: 20, farmedImported: 80 },
 ]
 
 const chartConfig = {
   natural: {
     label: "Natural Products",
-    color: "var(--chart-1)",
+    color: "#1E40AF", // Dark blue
   },
   farmedImported: {
     label: "Farmed/Imported Products",
-    color: "var(--chart-2)",
+    color: "#60A5FA", // Light blue
   },
 } satisfies ChartConfig
 
 export function ChartBarStacked() {
   return (
-    <Card>
+    <Card className="bg-black border-none">
       <CardHeader>
-        <CardTitle>Bar Chart - Stacked + Legend</CardTitle>
-        <CardDescription>Decline in Natural, Rise in Farmed/Imported Products</CardDescription>
+        <CardTitle className="text-white">Bar Chart - Stacked + Legend</CardTitle>
+        <CardDescription className="text-gray-400">Decline in Natural, Rise in Farmed/Imported Products</CardDescription>
       </CardHeader>
       <CardContent>
-        <ChartContainer config={chartConfig}>
+        <ChartContainer config={chartConfig} className="bg-black">
           <BarChart accessibilityLayer data={chartData}>
-            <CartesianGrid vertical={false} />
+            <CartesianGrid vertical={false} stroke="#4B5563" />
             <XAxis
-              dataKey="year"
+              dataKey="month"
               tickLine={false}
               tickMargin={10}
               axisLine={false}
+              tick={{ fill: "white" }}
             />
             <ChartTooltip content={<ChartTooltipContent hideLabel />} />
             <ChartLegend content={<ChartLegendContent />} />
