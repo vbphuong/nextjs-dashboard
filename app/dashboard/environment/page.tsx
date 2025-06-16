@@ -74,7 +74,7 @@ export default function EnvironmentPage() {
   ];
 
   return (
-    <div className="w-full min-h-screen bg-black text-white">
+    <div className="w-full min-h-screen bg-transparent text-white">
       {/* Introductory Section */}
       <section className="min-h-screen flex flex-col items-center justify-center px-4">
         <h1 className="text-4xl md:text-5xl font-bold text-center">
