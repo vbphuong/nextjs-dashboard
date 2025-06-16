@@ -1,5 +1,6 @@
 "use client"
 
+import { TrendingDown } from "lucide-react"
 import { Bar, BarChart, CartesianGrid, XAxis } from "recharts"
 import {
   Card,
@@ -90,10 +91,30 @@ export function ChartBarStacked() {
                 transition: "all 0.3s ease",
               }}
               onMouseOver={(e) => {
-                e.target.style.filter = "brightness(1.2) drop-shadow(0 0 10px rgba(30, 64, 175, 0.5))";
+                const rect = e.target as SVGRectElement;
+                rect.style.filter = "brightness(1.2)";
+                const shadow = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+                shadow.setAttribute("x", rect.getAttribute("x") || "0");
+                shadow.setAttribute("y", rect.getAttribute("y") || "0");
+                shadow.setAttribute("width", rect.getAttribute("width") || "0");
+                shadow.setAttribute("height", rect.getAttribute("height") || "0");
+                shadow.setAttribute("fill", "#4B5563"); // Dark gray, nearly black
+                shadow.setAttribute("opacity", "0");
+                shadow.style.transition = "opacity 0.3s ease";
+                rect.parentNode?.insertBefore(shadow, rect);
+                setTimeout(() => {
+                  shadow.setAttribute("opacity", "0.5");
+                }, 10);
+                rect.dataset.shadowId = shadow.getAttribute("id") || "";
               }}
               onMouseOut={(e) => {
-                e.target.style.filter = "none";
+                const rect = e.target as SVGRectElement;
+                rect.style.filter = "none";
+                const shadowId = rect.dataset.shadowId;
+                if (shadowId) {
+                  const shadow = rect.parentNode?.querySelector(`#${shadowId}`) as SVGRectElement;
+                  if (shadow) shadow.remove();
+                }
               }}
             />
             <Bar
@@ -109,10 +130,30 @@ export function ChartBarStacked() {
                 transition: "all 0.3s ease",
               }}
               onMouseOver={(e) => {
-                e.target.style.filter = "brightness(1.2) drop-shadow(0 0 10px rgba(96, 165, 250, 0.5))";
+                const rect = e.target as SVGRectElement;
+                rect.style.filter = "brightness(1.2)";
+                const shadow = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+                shadow.setAttribute("x", rect.getAttribute("x") || "0");
+                shadow.setAttribute("y", rect.getAttribute("y") || "0");
+                shadow.setAttribute("width", rect.getAttribute("width") || "0");
+                shadow.setAttribute("height", rect.getAttribute("height") || "0");
+                shadow.setAttribute("fill", "#4B5563"); // Dark gray, nearly black
+                shadow.setAttribute("opacity", "0");
+                shadow.style.transition = "opacity 0.3s ease";
+                rect.parentNode?.insertBefore(shadow, rect);
+                setTimeout(() => {
+                  shadow.setAttribute("opacity", "0.5");
+                }, 10);
+                rect.dataset.shadowId = shadow.getAttribute("id") || "";
               }}
               onMouseOut={(e) => {
-                e.target.style.filter = "none";
+                const rect = e.target as SVGRectElement;
+                rect.style.filter = "none";
+                const shadowId = rect.dataset.shadowId;
+                if (shadowId) {
+                  const shadow = rect.parentNode?.querySelector(`#${shadowId}`) as SVGRectElement;
+                  if (shadow) shadow.remove();
+                }
               }}
             />
           </BarChart>
