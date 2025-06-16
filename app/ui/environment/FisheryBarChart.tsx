@@ -251,19 +251,18 @@ export function FisheryBarChart() {
                     dataKey={activeChart}
                     fill={`var(--color-${activeChart})`}
                   >
-                    <AnimatePresence>
+                    {chartData.map((_, barIndex) => (
                       <motion.rect
-                        key={`${activeChart}-${index}`}
+                        key={`${activeChart}-${barIndex}`}
                         initial="hidden"
-                        animate="visible"
-                        exit="hidden"
+                        animate={isVisible ? 'visible' : 'hidden'}
                         variants={barVariants}
-                        custom={index}
+                        custom={barIndex}
                         width="100%"
                         height="100%"
                         style={{ fill: `var(--color-${activeChart})` }}
                       />
-                    </AnimatePresence>
+                    ))}
                   </Bar>
                 ))}
               </AnimatePresence>
