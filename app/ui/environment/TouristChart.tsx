@@ -73,7 +73,7 @@ export default function TouristChart() {
               data={chartData}
               margin={{ left: 12, right: 12 }}
               width={600}
-              height={300}
+              height={150}
             >
               <CartesianGrid vertical={false} />
               <XAxis

@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import EnvironmentChart from '@/app/ui/environment/EnvironmentChart';
 import TouristChart from '@/app/ui/environment/TouristChart';
+import { FisheryBarChart } from '@/app/ui/environment/FisheryBarChart';
 
 // Animation variants for the heading (word-by-word)
 const headingVariants = {
@@ -121,7 +122,7 @@ export default function EnvironmentPage() {
             viewport={{ once: true, amount: 0.2 }}
             variants={titleVariants}
           >
-            Groups of people based on characteristics
+            Trends of temperature and rainfall in Mekong Delta
           </motion.h2>
           <EnvironmentChart />
 
@@ -133,9 +134,21 @@ export default function EnvironmentPage() {
             viewport={{ once: true, amount: 0.2 }}
             variants={titleVariants}
           >
-            Groups of people based on characteristics
+            Number of tourists visiting Mekong Delta 2025
           </motion.h2>
           <TouristChart />
+
+          <div className="h-[10vh]" /> {/* 10% height spacer */}
+          <motion.h2
+            className="text-2xl md:text-3xl font-semibold text-center text-blue-200 mb-6"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+            variants={titleVariants}
+          >
+            Fishery data and its value in Mekong Delta 
+          </motion.h2>
+          <FisheryBarChart />
         </div>
       </section>
     </div>
