@@ -80,7 +80,7 @@ export function ChartBarStacked() {
               stackId="a"
               fill="#1E40AF"
               radius={[0, 0, 4, 4]}
-              isAnimationActive={true}
+              isAnimationActive={false}
               animationDuration={500}
               style={{ transition: "all 0.3s ease" }}
             />
@@ -89,7 +89,7 @@ export function ChartBarStacked() {
               stackId="a"
               fill="#60A5FA"
               radius={[4, 4, 0, 0]}
-              isAnimationActive={true}
+              isAnimationActive={false}
               animationDuration={500}
               style={{ transition: "all 0.3s ease" }}
             />
