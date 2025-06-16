@@ -133,7 +133,6 @@ export function FisheryBarChart() {
     []
   );
 
-  // Animation variants for bars
   const barVariants = {
     hidden: { width: 0, opacity: 0 },
     visible: (i: number) => ({
@@ -147,7 +146,6 @@ export function FisheryBarChart() {
     }),
   };
 
-  // Custom bar shape to apply animation
   const CustomBar = (props: { x?: number; y?: number; width?: number; height?: number; fill?: string; index?: number }) => {
     const { x, y, width, height, fill } = props;
     return (
@@ -201,14 +199,12 @@ export function FisheryBarChart() {
           className="aspect-auto h-[250px] w-full"
         >
           <BarChart
-            accessibilityLayer
             data={chartData}
-            margin={{ left: 12, right: 12 }}
+            margin={{ left: 12, right: 12, top: 10, bottom: 10 }}
             width={600}
             height={300}
-            barSize={20} // Fixed bar width
-            barCategoryGap={10} // Space between categories (bars)
-            barGap={2} // Space within a category (if multiple bars per category)
+            barSize={20}
+            barCategoryGap={15}
           >
             <CartesianGrid vertical={false} stroke="#d1d5db" />
             <XAxis
@@ -217,7 +213,7 @@ export function FisheryBarChart() {
               axisLine={false}
               tickMargin={8}
               minTickGap={32}
-              tickFormatter={(value) => {
+              tickFormatter={(value: string) => {
                 const date = new Date(value);
                 return date.toLocaleDateString('en-US', {
                   month: 'short',
@@ -230,7 +226,7 @@ export function FisheryBarChart() {
                 <ChartTooltipContent
                   className="w-[150px]"
                   nameKey={activeChart}
-                  labelFormatter={(value) => {
+                  labelFormatter={(value: string) => {
                     return new Date(value).toLocaleDateString('en-US', {
                       month: 'short',
                       day: 'numeric',
