@@ -81,7 +81,7 @@ export function ChartBarStacked() {
             <Bar
               dataKey="natural"
               stackId="a"
-              fill="var(--color-natural)"
+              fill="#1E40AF"
               radius={[0, 0, 4, 4]}
               activeBar={false}
               isAnimationActive={true}
@@ -95,7 +95,7 @@ export function ChartBarStacked() {
             <Bar
               dataKey="farmedImported"
               stackId="a"
-              fill="var(--color-farmedImported)"
+              fill="#60A5FA"
               radius={[4, 4, 0, 0]}
               activeBar={false}
               isAnimationActive={true}
