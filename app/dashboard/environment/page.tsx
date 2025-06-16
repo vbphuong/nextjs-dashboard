@@ -149,6 +149,8 @@ export default function EnvironmentPage() {
             Fishery data and its value in Mekong Delta 
           </motion.h2>
           <FisheryBarChart />
+
+          <div className="h-[10vh]" /> {/* 10% height spacer */}
         </div>
       </section>
     </div>
