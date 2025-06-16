@@ -15,7 +15,6 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from '@/components/ui/chart';
-import { motion } from 'framer-motion';
 
 const chartData = [
   { date: '2024-04-01', yield: 3400, value: 3200 },
@@ -133,36 +132,6 @@ export function FisheryBarChart() {
     []
   );
 
-  const barVariants = {
-    hidden: { width: 0, opacity: 0 },
-    visible: (i: number) => ({
-      width: '100%',
-      opacity: 1,
-      transition: {
-        delay: i * 0.05,
-        duration: 0.5,
-        ease: 'easeOut',
-      },
-    }),
-  };
-
-  const CustomBar = (props: { x?: number; y?: number; width?: number; height?: number; fill?: string; index?: number }) => {
-    const { x, y, width, height, fill } = props;
-    return (
-      <motion.rect
-        x={x}
-        y={y}
-        width={width}
-        height={height}
-        fill={fill}
-        initial="hidden"
-        animate="visible"
-        variants={barVariants}
-        custom={props.index}
-      />
-    );
-  };
-
   return (
     <Card className="py-0 bg-gray-900/80 border-gray-700">
       <CardHeader className="flex flex-col items-stretch border-b !p-0 sm:flex-row">
@@ -199,12 +168,11 @@ export function FisheryBarChart() {
           className="aspect-auto h-[250px] w-full"
         >
           <BarChart
+            accessibilityLayer
             data={chartData}
-            margin={{ left: 12, right: 12, top: 10, bottom: 10 }}
+            margin={{ left: 12, right: 12 }}
             width={600}
             height={300}
-            barSize={20}
-            barCategoryGap={15}
           >
             <CartesianGrid vertical={false} stroke="#d1d5db" />
             <XAxis
@@ -213,7 +181,7 @@ export function FisheryBarChart() {
               axisLine={false}
               tickMargin={8}
               minTickGap={32}
-              tickFormatter={(value: string) => {
+              tickFormatter={(value) => {
                 const date = new Date(value);
                 return date.toLocaleDateString('en-US', {
                   month: 'short',
@@ -226,7 +194,7 @@ export function FisheryBarChart() {
                 <ChartTooltipContent
                   className="w-[150px]"
                   nameKey={activeChart}
-                  labelFormatter={(value: string) => {
+                  labelFormatter={(value) => {
                     return new Date(value).toLocaleDateString('en-US', {
                       month: 'short',
                       day: 'numeric',
@@ -236,11 +204,7 @@ export function FisheryBarChart() {
                 />
               }
             />
-            <Bar
-              dataKey={activeChart}
-              fill={`var(--color-${activeChart})`}
-              shape={<CustomBar />}
-            />
+            <Bar dataKey={activeChart} fill={`var(--color-${activeChart})`} />
           </BarChart>
         </ChartContainer>
       </CardContent>
