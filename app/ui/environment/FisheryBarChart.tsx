@@ -124,7 +124,6 @@ const chartConfig = {
 
 export function FisheryBarChart() {
   const [activeChart, setActiveChart] = React.useState<keyof typeof chartConfig>('yield');
-  const [isVisible, setIsVisible] = React.useState(false);
 
   const total = React.useMemo(
     () => ({
@@ -148,126 +147,104 @@ export function FisheryBarChart() {
     }),
   };
 
-  // Handle scroll visibility
-  React.useEffect(() => {
-    const handleScroll = () => {
-      const element = document.querySelector('#fishery-chart');
-      if (element) {
-        const rect = element.getBoundingClientRect();
-        const isInView = rect.top >= 0 && rect.bottom <= window.innerHeight;
-        setIsVisible(isInView);
-      }
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  // Custom bar shape to apply animation
+  const CustomBar = (props: any) => {
+    const { x, y, width, height, fill } = props;
+    return (
+      <motion.rect
+        x={x}
+        y={y}
+        width={width}
+        height={height}
+        fill={fill}
+        initial="hidden"
+        animate="visible"
+        variants={barVariants}
+        custom={props.index}
+      />
+    );
+  };
 
   return (
-    <motion.div
-      id="fishery-chart"
-      className="w-full"
-      initial="hidden"
-      animate={isVisible ? 'visible' : 'hidden'}
-      variants={{
-        hidden: { opacity: 0 },
-        visible: { opacity: 1, transition: { duration: 0.5 } },
-      }}
-    >
-      <Card className="py-0 bg-gray-900/80 border-gray-700">
-        <CardHeader className="flex flex-col items-stretch border-b !p-0 sm:flex-row">
-          <div className="flex flex-1 flex-col justify-center gap-1 px-6 pt-4 pb-3 sm:!py-0">
-            <CardTitle className="text-white">Bar Chart - Interactive</CardTitle>
-            <CardDescription className="text-gray-400">
-              Showing fishery data for the last 3 months
-            </CardDescription>
-          </div>
-          <div className="flex">
-            {['yield', 'value'].map((key) => {
-              const chart = key as keyof typeof chartConfig;
-              return (
-                <button
-                  key={chart}
-                  data-active={activeChart === chart}
-                  className="data-[active=true]:bg-muted/50 relative z-30 flex flex-1 flex-col justify-center gap-1 border-t px-6 py-4 text-left even:border-l sm:border-t-0 sm:border-l sm:px-8 sm:py-6 text-white"
-                  onClick={() => setActiveChart(chart)}
-                >
-                  <span className="text-gray-400 text-xs">
-                    {chartConfig[chart].label}
-                  </span>
-                  <span className="text-lg leading-none font-bold sm:text-3xl">
-                    {total[key as keyof typeof total].toLocaleString()}
-                  </span>
-                </button>
-              );
-            })}
-          </div>
-        </CardHeader>
-        <CardContent className="px-2 sm:p-6">
-          <ChartContainer
-            config={chartConfig}
-            className="aspect-auto h-[250px] w-full"
+    <Card className="py-0 bg-gray-900/80 border-gray-700">
+      <CardHeader className="flex flex-col items-stretch border-b !p-0 sm:flex-row">
+        <div className="flex flex-1 flex-col justify-center gap-1 px-6 pt-4 pb-3 sm:!py-0">
+          <CardTitle className="text-white">Bar Chart - Interactive</CardTitle>
+          <CardDescription className="text-gray-400">
+            Showing fishery data for the last 3 months
+          </CardDescription>
+        </div>
+        <div className="flex">
+          {['yield', 'value'].map((key) => {
+            const chart = key as keyof typeof chartConfig;
+            return (
+              <button
+                key={chart}
+                data-active={activeChart === chart}
+                className="data-[active=true]:bg-muted/50 relative z-30 flex flex-1 flex-col justify-center gap-1 border-t px-6 py-4 text-left even:border-l sm:border-t-0 sm:border-l sm:px-8 sm:py-6 text-white"
+                onClick={() => setActiveChart(chart)}
+              >
+                <span className="text-gray-400 text-xs">
+                  {chartConfig[chart].label}
+                </span>
+                <span className="text-lg leading-none font-bold sm:text-3xl">
+                  {total[key as keyof typeof total].toLocaleString()}
+                </span>
+              </button>
+            );
+          })}
+        </div>
+      </CardHeader>
+      <CardContent className="px-2 sm:p-6">
+        <ChartContainer
+          config={chartConfig}
+          className="aspect-auto h-[250px] w-full"
+        >
+          <BarChart
+            accessibilityLayer
+            data={chartData}
+            margin={{ left: 12, right: 12 }}
+            width={600}
+            height={300}
           >
-            <BarChart
-              accessibilityLayer
-              data={chartData}
-              margin={{ left: 12, right: 12 }}
-              width={600}
-              height={300}
-            >
-              <CartesianGrid vertical={false} stroke="#d1d5db" />
-              <XAxis
-                dataKey="date"
-                tickLine={false}
-                axisLine={false}
-                tickMargin={8}
-                minTickGap={32}
-                tickFormatter={(value) => {
-                  const date = new Date(value);
-                  return date.toLocaleDateString('en-US', {
-                    month: 'short',
-                    day: 'numeric',
-                  });
-                }}
-              />
-              <ChartTooltip
-                content={
-                  <ChartTooltipContent
-                    className="w-[150px]"
-                    nameKey={activeChart}
-                    labelFormatter={(value) => {
-                      return new Date(value).toLocaleDateString('en-US', {
-                        month: 'short',
-                        day: 'numeric',
-                        year: 'numeric',
-                      });
-                    }}
-                  />
-                }
-              />
-              <AnimatePresence>
-                <Bar
-                  key={activeChart}
-                  dataKey={activeChart}
-                  fill={`var(--color-${activeChart})`}
-                >
-                  {chartData.map((entry, index) => (
-                    <motion.rect
-                      key={`${activeChart}-${index}`}
-                      initial="hidden"
-                      animate={isVisible ? 'visible' : 'hidden'}
-                      variants={barVariants}
-                      custom={index}
-                      width="100%"
-                      height="100%"
-                      style={{ fill: `var(--color-${activeChart})` }}
-                    />
-                  ))}
-                </Bar>
-              </AnimatePresence>
-            </BarChart>
-          </ChartContainer>
-        </CardContent>
-      </Card>
-    </motion.div>
+            <CartesianGrid vertical={false} stroke="#d1d5db" />
+            <XAxis
+              dataKey="date"
+              tickLine={false}
+              axisLine={false}
+              tickMargin={8}
+              minTickGap={32}
+              tickFormatter={(value) => {
+                const date = new Date(value);
+                return date.toLocaleDateString('en-US', {
+                  month: 'short',
+                  day: 'numeric',
+                });
+              }}
+            />
+            <ChartTooltip
+              content={
+                <ChartTooltipContent
+                  className="w-[150px]"
+                  nameKey={activeChart}
+                  labelFormatter={(value) => {
+                    return new Date(value).toLocaleDateString('en-US', {
+                      month: 'short',
+                      day: 'numeric',
+                      year: 'numeric',
+                    });
+                  }}
+                />
+              }
+            />
+            <Bar
+              dataKey={activeChart}
+              fill={`var(--color-${activeChart})`}
+              shape={<CustomBar />}
+            />
+          </BarChart>
+        </ChartContainer>
+      </CardContent>
+    </Card>
   );
 }
