@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import EnvironmentChart from '@/app/ui/environment/EnvironmentChart';
 import TouristChart from '@/app/ui/environment/TouristChart';
 import { FisheryBarChart } from '@/app/ui/environment/FisheryBarChart';
+import { ChartBarStacked } from '@/app/ui/environment/OrganicProduct';
 
 // Animation variants for the heading (word-by-word)
 const headingVariants = {
@@ -151,6 +152,16 @@ export default function EnvironmentPage() {
           <FisheryBarChart />
 
           <div className="h-[10vh]" /> {/* 10% height spacer */}
+          <motion.h2
+            className="text-2xl md:text-3xl font-semibold text-center text-blue-200 mb-6"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+            variants={titleVariants}
+          >
+            The decrease of organic products in Mekong Delta last 4 months 
+          </motion.h2>
+          <ChartBarStacked />
         </div>
       </section>
     </div>
