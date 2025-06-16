@@ -15,7 +15,7 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from '@/components/ui/chart';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 const chartData = [
   { date: '2024-04-01', yield: 3400, value: 3200 },
@@ -148,7 +148,7 @@ export function FisheryBarChart() {
   };
 
   // Custom bar shape to apply animation
-  const CustomBar = (props: any) => {
+  const CustomBar = (props: { x?: number; y?: number; width?: number; height?: number; fill?: string; index?: number }) => {
     const { x, y, width, height, fill } = props;
     return (
       <motion.rect
