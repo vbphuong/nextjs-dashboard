@@ -168,6 +168,7 @@ export function FisheryBarChart() {
           className="aspect-auto h-[250px] w-full"
         >
           <BarChart
+            key={activeChart}
             accessibilityLayer
             data={chartData}
             margin={{ left: 12, right: 12 }}
@@ -204,7 +205,14 @@ export function FisheryBarChart() {
                 />
               }
             />
-            <Bar dataKey={activeChart} fill={`var(--color-${activeChart})`} />
+            <Bar
+            dataKey={activeChart}
+            fill={chartConfig[activeChart].color}
+            isAnimationActive={true}
+            animationBegin={0}
+            animationDuration={1000}
+            />
+
           </BarChart>
         </ChartContainer>
       </CardContent>
