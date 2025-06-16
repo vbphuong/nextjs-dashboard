@@ -68,13 +68,13 @@ export default function TouristChart() {
         </CardHeader>
         <CardContent>
           <ChartContainer config={chartConfig}>
-            <LineChart
-              accessibilityLayer
-              data={chartData}
-              margin={{ left: 12, right: 12 }}
-              width={600}
-              height={150}
-            >
+          <LineChart
+            accessibilityLayer
+            data={chartData}
+            margin={{ top: 10, right: 12, left: 12, bottom: 10 }}  
+            width={600}
+            height={150}  
+          >
               <CartesianGrid vertical={false} />
               <XAxis
                 dataKey="month"
