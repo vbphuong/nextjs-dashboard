@@ -1,6 +1,5 @@
 "use client"
 
-
 import { Bar, BarChart, CartesianGrid, XAxis } from "recharts"
 import {
   Card,
@@ -41,18 +40,20 @@ export function ChartBarStacked() {
     <Card className="bg-black border-none">
       <CardHeader>
         <CardTitle className="text-white">Bar Chart - Stacked + Legend</CardTitle>
-        <CardDescription className="text-gray-400">Decline in Natural, Rise in Farmed/Imported Products</CardDescription>
+        <CardDescription className="text-gray-400">
+          Decline in Natural, Rise in Farmed/Imported Products
+        </CardDescription>
       </CardHeader>
       <CardContent>
         <ChartContainer config={chartConfig} className="bg-black">
-          <BarChart accessibilityLayer data={chartData}>
+          <BarChart data={chartData}>
             <CartesianGrid vertical={false} stroke="#4B5563" />
             <XAxis
               dataKey="month"
               tickLine={false}
               tickMargin={10}
               axisLine={false}
-              tick={{ fill: "black" }}
+              tick={{ fill: "white" }}
             />
             <ChartTooltip
               content={
@@ -63,52 +64,46 @@ export function ChartBarStacked() {
                     border: "1px solid #4B5563",
                     borderRadius: "8px",
                     padding: "10px",
-                    color: "black",
+                    color: "white",
                     boxShadow: "0 4px 6px rgba(0, 0, 0, 0.3)",
                   }}
-                  itemStyle={{ color: "black" }}
-                  labelStyle={{ color: "black" }}
+                  itemStyle={{ color: "white" }}
+                  labelStyle={{ color: "white" }}
                 />
               }
             />
             <ChartLegend
-              content={
-                <ChartLegendContent
-                  className="text-white"
-                />
-              }
+              content={<ChartLegendContent className="text-white" />}
             />
             <Bar
               dataKey="natural"
               stackId="a"
               fill="#1E40AF"
               radius={[0, 0, 4, 4]}
-              activeBar={false}
               isAnimationActive={true}
               animationDuration={500}
-              onMouseEnter={() => {}}
-              onMouseLeave={() => {}}
-              style={{
-                transition: "all 0.3s ease",
-              }}
+              style={{ transition: "all 0.3s ease" }}
             />
             <Bar
               dataKey="farmedImported"
               stackId="a"
               fill="#60A5FA"
               radius={[4, 4, 0, 0]}
-              activeBar={false}
               isAnimationActive={true}
               animationDuration={500}
-              onMouseEnter={() => {}}
-              onMouseLeave={() => {}}
-              style={{
-                transition: "all 0.3s ease",
-              }}
+              style={{ transition: "all 0.3s ease" }}
             />
           </BarChart>
         </ChartContainer>
       </CardContent>
+
+      {/* CSS Override để fix hover trắng */}
+      <style jsx global>{`
+        .recharts-bar-rectangle:hover {
+          fill: inherit !important;
+          stroke: none !important;
+        }
+      `}</style>
     </Card>
   )
 }
