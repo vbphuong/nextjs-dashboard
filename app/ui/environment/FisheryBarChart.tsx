@@ -245,26 +245,24 @@ export function FisheryBarChart() {
                 }
               />
               <AnimatePresence>
-                {chartData.map((entry, index) => (
-                  <Bar
-                    key={`${activeChart}-${index}`}
-                    dataKey={activeChart}
-                    fill={`var(--color-${activeChart})`}
-                  >
-                    {chartData.map((_, barIndex) => (
-                      <motion.rect
-                        key={`${activeChart}-${barIndex}`}
-                        initial="hidden"
-                        animate={isVisible ? 'visible' : 'hidden'}
-                        variants={barVariants}
-                        custom={barIndex}
-                        width="100%"
-                        height="100%"
-                        style={{ fill: `var(--color-${activeChart})` }}
-                      />
-                    ))}
-                  </Bar>
-                ))}
+                <Bar
+                  key={activeChart}
+                  dataKey={activeChart}
+                  fill={`var(--color-${activeChart})`}
+                >
+                  {chartData.map((entry, index) => (
+                    <motion.rect
+                      key={`${activeChart}-${index}`}
+                      initial="hidden"
+                      animate={isVisible ? 'visible' : 'hidden'}
+                      variants={barVariants}
+                      custom={index}
+                      width="100%"
+                      height="100%"
+                      style={{ fill: `var(--color-${activeChart})` }}
+                    />
+                  ))}
+                </Bar>
               </AnimatePresence>
             </BarChart>
           </ChartContainer>
