@@ -52,7 +52,7 @@ export function ChartBarStacked() {
               tickLine={false}
               tickMargin={10}
               axisLine={false}
-              tick={{ fill: "white" }}
+              tick={{ fill: "black" }}
             />
             <ChartTooltip
               content={
@@ -63,11 +63,11 @@ export function ChartBarStacked() {
                     border: "1px solid #4B5563",
                     borderRadius: "8px",
                     padding: "10px",
-                    color: "#FFFFFF",
+                    color: "black",
                     boxShadow: "0 4px 6px rgba(0, 0, 0, 0.3)",
                   }}
-                  itemStyle={{ color: "#FFFFFF" }}
-                  labelStyle={{ color: "#FFFFFF" }}
+                  itemStyle={{ color: "black" }}
+                  labelStyle={{ color: "black" }}
                 />
               }
             />
