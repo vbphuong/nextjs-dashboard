@@ -83,6 +83,7 @@ export function ChartBarStacked() {
               stackId="a"
               fill="var(--color-natural)"
               radius={[0, 0, 4, 4]}
+              activeBar={false}
               isAnimationActive={true}
               animationDuration={500}
               onMouseEnter={() => {}}
@@ -96,6 +97,7 @@ export function ChartBarStacked() {
               stackId="a"
               fill="var(--color-farmedImported)"
               radius={[4, 4, 0, 0]}
+              activeBar={false}
               isAnimationActive={true}
               animationDuration={500}
               onMouseEnter={() => {}}
