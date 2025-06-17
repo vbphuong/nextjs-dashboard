@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import ThreeRadarCharts from '@/app/ui/supply_chain/ChartRadarNonagon';
-import SingleHorizontalBarChart from '@/app/ui/supply_chain/HorizontalBar';
+import { SingleHorizontalBarChart } from '@/app/ui/supply_chain/HorizontalBar';
 
 // Animation variants for the heading (word-by-word)
 const headingVariants = {

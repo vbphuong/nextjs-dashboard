@@ -32,7 +32,7 @@ const chartConfig = {
   },
 } satisfies ChartConfig
 
-function SingleHorizontalBarChart() {
+export function SingleHorizontalBarChart() {
   return (
     <Card className="w-full bg-black text-white">
       <CardHeader className="items-center pb-2">
@@ -43,8 +43,8 @@ function SingleHorizontalBarChart() {
         <ChartContainer config={chartConfig} className="h-full">
           <BarChart data={chartDataJune} layout="vertical">
             <CartesianGrid stroke="#444" />
-            <XAxis type="number" stroke="white" fontSize={12} />
-            <YAxis dataKey="name" type="category" stroke="white" fontSize={12} />
+            <XAxis type="number" stroke="black" fontSize={12} />
+            <YAxis dataKey="name" type="category" stroke="black" fontSize={12} />
             <ChartTooltip />
             <Bar dataKey="minDays" fill="#87CEEB" barSize={30} />
             <Bar dataKey="maxDays" fill="#1E90FF" barSize={30} />
@@ -60,13 +60,5 @@ function SingleHorizontalBarChart() {
         </div>
       </CardFooter>
     </Card>
-  )
-}
-
-export default function OneHorizontalBarCharts() {
-  return (
-    <div className="w-full">
-      <SingleHorizontalBarChart />
-    </div>
   )
 }
