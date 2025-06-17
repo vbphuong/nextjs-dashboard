@@ -121,7 +121,7 @@ export default function EnvironmentPage() {
             viewport={{ once: true, amount: 0.2 }}
             variants={titleVariants}
           >
-            Risks Leading to Supply Shortages in Mekong Delta
+            Risks Leading to Supply Shortages 3 months recently
           </motion.h2>
           <ThreeRadarCharts />
         </div>
