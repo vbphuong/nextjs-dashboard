@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import ThreeRadarCharts from '@/app/ui/supply_chain/ChartRadarNonagon';
-import ThreeHorizontalBarCharts from '@/app/ui/supply_chain/HorizontalBar';
+import OneHorizontalBarCharts from '@/app/ui/supply_chain/HorizontalBar';
 
 // Animation variants for the heading (word-by-word)
 const headingVariants = {
@@ -127,7 +127,7 @@ export default function EnvironmentPage() {
           <ThreeRadarCharts />
           
           <div className="h-[10vh]" /> {/* 10% height spacer */}
-          <ThreeHorizontalBarCharts />
+          <OneHorizontalBarCharts />
         </div>
       </section>
     </div>
