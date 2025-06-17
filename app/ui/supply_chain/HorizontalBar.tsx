@@ -18,12 +18,12 @@ import {
 } from "@/components/ui/chart"
 
 const chartData = [
-  { name: "Rico", minDays: 12, maxDays: 22 },
-  { name: "Sentfood", minDays: 17, maxDays: 37 },
-  { name: "Fvivts", minDays: 10, maxDays: 17 },
-  { name: "Siock and pevilty", minDays: 14, maxDays: 27 },
-  { name: "Piebesed food", minDays: 20, maxDays: 32 },
-  { name: "Aoritoitunal prodvets", minDays: 22, maxDays: 42 },
+  { name: "Rice", minDays: 24, maxDays: 44 },
+  { name: "Seafood", minDays: 34, maxDays: 64},
+  { name: "Fruits", minDays: 20, maxDays: 34 },
+  { name: "Stock and poultry", minDays: 28, maxDays: 54 },
+  { name: "Processed food", minDays: 40, maxDays: 64 },
+  { name: "Agricultural products", minDays: 44, maxDays: 76 },
 ]
 
 const chartConfig = {
@@ -46,7 +46,7 @@ export function SingleHorizontalBarChart() {
       </CardHeader>
       <CardContent className="h-[400px]">
         <ChartContainer config={chartConfig} className="h-full">
-          <BarChart data={chartData} layout="vertical">
+          <BarChart data={chartData} layout="vertical" className="text-white">
             <CartesianGrid horizontal={false} stroke="#444" />
             <YAxis
               dataKey="name"
