@@ -29,11 +29,11 @@ const chartData = [
 const chartConfig = {
   minDays: {
     label: "Minimum Days",
-    color: "var(--chart-1)",
+    color: "#87CEEB",
   },
   maxDays: {
     label: "Maximum Days",
-    color: "var(--chart-2)",
+    color: "#1E90FF",
   },
 } satisfies ChartConfig
 
@@ -63,8 +63,8 @@ export function SingleHorizontalBarChart() {
               axisLine={false}
             />
             <ChartTooltip cursor={false} content={<ChartTooltipContent indicator="dashed" />} />
-            <Bar dataKey="minDays" fill="var(--color-minDays)" radius={4} />
-            <Bar dataKey="maxDays" fill="var(--color-maxDays)" radius={4} />
+            <Bar dataKey="minDays" fill="#87CEEB" radius={4} />
+            <Bar dataKey="maxDays" fill="#1E90FF" radius={4} />
           </BarChart>
         </ChartContainer>
       </CardContent>
