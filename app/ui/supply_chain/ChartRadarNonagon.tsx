@@ -71,7 +71,7 @@ interface RadarChartProps {
 
 function SingleRadarChart({ data, title, description, footerText, trend }: RadarChartProps) {
   return (
-    <Card className="w-[280px]">
+    <Card className="w-[320px]">
       <CardHeader className="items-center pb-2">
         <CardTitle className="text-sm">{title}</CardTitle>
         <CardDescription className="text-xs">{description}</CardDescription>
@@ -79,7 +79,7 @@ function SingleRadarChart({ data, title, description, footerText, trend }: Radar
       <CardContent className="pb-0">
         <ChartContainer
           config={chartConfig}
-          className="mx-auto aspect-square max-h-[200px]"
+          className="mx-auto aspect-square max-h-[240px]"
         >
           <RadarChart data={data}>
             <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
