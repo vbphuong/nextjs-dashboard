@@ -1,5 +1,6 @@
 "use client"
 
+import { TrendingUp } from "lucide-react"
 import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from "recharts"
 import {
   Card,
@@ -9,10 +10,14 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import { ChartConfig, ChartContainer, ChartTooltip } from "@/components/ui/chart"
+import {
+  ChartConfig,
+  ChartContainer,
+  ChartTooltip,
+  ChartTooltipContent,
+} from "@/components/ui/chart"
 
-// Data for June 2025 (single month)
-const chartDataJune = [
+const chartData = [
   { name: "Rico", minDays: 12, maxDays: 22 },
   { name: "Sentfood", minDays: 17, maxDays: 37 },
   { name: "Fvivts", minDays: 10, maxDays: 17 },
@@ -23,39 +28,51 @@ const chartDataJune = [
 
 const chartConfig = {
   minDays: {
-    label: "minimum days",
-    color: "#87CEEB", // Light blue
+    label: "Minimum Days",
+    color: "var(--chart-1)",
   },
   maxDays: {
-    label: "maximum days",
-    color: "#1E90FF", // Blue
+    label: "Maximum Days",
+    color: "var(--chart-2)",
   },
 } satisfies ChartConfig
 
 export function SingleHorizontalBarChart() {
   return (
     <Card className="w-full bg-black text-white">
-      <CardHeader className="items-center pb-2">
-        <CardTitle className="text-lg">Performance Jun 2025</CardTitle>
-        <CardDescription className="text-sm">Days for June 2025</CardDescription>
+      <CardHeader>
+        <CardTitle>Performance Jun 2025</CardTitle>
+        <CardDescription>Days for June 2025</CardDescription>
       </CardHeader>
-      <CardContent className="pb-0 h-[400px]">
+      <CardContent className="h-[400px]">
         <ChartContainer config={chartConfig} className="h-full">
-          <BarChart data={chartDataJune} layout="vertical">
-            <CartesianGrid stroke="#444" />
-            <XAxis type="number" stroke="black" fontSize={12} />
-            <YAxis dataKey="name" type="category" stroke="black" fontSize={12} />
-            <ChartTooltip />
-            <Bar dataKey="minDays" fill="#87CEEB" barSize={30} />
-            <Bar dataKey="maxDays" fill="#1E90FF" barSize={30} />
+          <BarChart data={chartData} layout="vertical">
+            <CartesianGrid horizontal={false} stroke="#444" />
+            <YAxis
+              dataKey="name"
+              type="category"
+              stroke="white"
+              tickLine={false}
+              axisLine={false}
+              tickMargin={10}
+            />
+            <XAxis
+              type="number"
+              stroke="white"
+              tickLine={false}
+              axisLine={false}
+            />
+            <ChartTooltip cursor={false} content={<ChartTooltipContent indicator="dashed" />} />
+            <Bar dataKey="minDays" fill="var(--color-minDays)" radius={4} />
+            <Bar dataKey="maxDays" fill="var(--color-maxDays)" radius={4} />
           </BarChart>
         </ChartContainer>
       </CardContent>
-      <CardFooter className="flex-col gap-2 text-sm">
-        <div className="flex items-center gap-2 leading-none font-medium">
-          Up by 3%
+      <CardFooter className="flex-col items-start gap-2 text-sm">
+        <div className="flex gap-2 leading-none font-medium">
+          Up by 3% <TrendingUp className="h-4 w-4" />
         </div>
-        <div className="text-gray-300 flex items-center gap-2 leading-none">
+        <div className="text-muted-foreground leading-none">
           June 2025
         </div>
       </CardFooter>
