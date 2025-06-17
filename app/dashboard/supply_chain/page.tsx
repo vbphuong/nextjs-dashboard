@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { ChartRadarNonagon } from '@/app/ui/supply_chain/ChartRadarNonagon';
+import { ThreeRadarCharts } from '@/app/ui/supply_chain/ChartRadarNonagon';
 
 // Animation variants for the heading (word-by-word)
 const headingVariants = {
@@ -121,9 +121,9 @@ export default function EnvironmentPage() {
             viewport={{ once: true, amount: 0.2 }}
             variants={titleVariants}
           >
-            Trends of temperature and rainfall in Mekong Delta
+            Risks Leading to Supply Shortages in Mekong Delta
           </motion.h2>
-          <ChartRadarNonagon />
+          <ThreeRadarCharts />
         </div>
       </section>
     </div>
