@@ -45,9 +45,9 @@ export function SingleHorizontalBarChart() {
         <CardDescription>Days for June 2025</CardDescription>
       </CardHeader>
       <CardContent className="h-[400px]">
-        <ChartContainer config={chartConfig} className="h-full">
-          <BarChart data={chartData} layout="vertical" className="text-white">
-            <CartesianGrid horizontal={false} stroke="#444" />
+        <ChartContainer config={chartConfig} className="h-full" style={{ marginLeft: '50px' }}>
+          <BarChart data={chartData} layout="vertical" >
+            <CartesianGrid horizontal={false} className="#text-grey" />
             <YAxis
               dataKey="name"
               type="category"
