@@ -19,39 +19,39 @@ import {
 
 // Data for three different charts (April, May, June 2025)
 const chartData1 = [
-  { metric: "Sự lún đất", value: 2 },
-  { metric: "Thiểu nước ngầm", value: 3 },
-  { metric: "Xâm nhập mặn", value: 4 },
-  { metric: "Ô nhiễm môi trường", value: 1 },
-  { metric: "Thiểu lao động", value: 2 },
-  { metric: "Hạ tầng logistics yếu", value: 1 },
-  { metric: "Biến đổi khí hậu", value: 5 },
-  { metric: "Phụ thuộc xuất khẩu thô", value: 2 },
-  { metric: "Biến động thị trường", value: 3 },
+  { metric: "Land subsidence", value: 2 },
+  { metric: "Groundwater depletion", value: 3 },
+  { metric: "Saline intrusion", value: 4 },
+  { metric: "Pollution", value: 5 },
+  { metric: "Labor shortage", value: 2 },
+  { metric: "Weak logistics", value: 4 },
+  { metric: "Climate change", value: 5 },
+  { metric: "Raw material exports", value: 2 },
+  { metric: "Market fluctuations", value: 3 },
 ]
 
 const chartData2 = [
-  { metric: "Sự lún đất", value: 2 },
-  { metric: "Thiểu nước ngầm", value: 4 },
-  { metric: "Xâm nhập mặn", value: 3 },
-  { metric: "Ô nhiễm môi trường", value: 1 },
-  { metric: "Thiểu lao động", value: 2 },
-  { metric: "Hạ tầng logistics yếu", value: 1 },
-  { metric: "Biến đổi khí hậu", value: 5 },
-  { metric: "Phụ thuộc xuất khẩu thô", value: 3 },
-  { metric: "Biến động thị trường", value: 4 },
+  { metric: "Land subsidence", value: 2 },
+  { metric: "Groundwater depletion", value: 4 },
+  { metric: "Saline intrusion", value: 3 },
+  { metric: "Pollution", value: 5 },
+  { metric: "Labor shortage", value: 2 },
+  { metric: "Weak logistics", value: 4 },
+  { metric: "Climate change", value: 5 },
+  { metric: "Raw material exports", value: 3 },
+  { metric: "Market fluctuations", value: 4 },
 ]
 
 const chartData3 = [
-  { metric: "Sự lún đất", value: 2 },
-  { metric: "Thiểu nước ngầm", value: 4 },
-  { metric: "Xâm nhập mặn", value: 3 },
-  { metric: "Ô nhiễm môi trường", value: 2 },
-  { metric: "Thiểu lao động", value: 2 },
-  { metric: "Hạ tầng logistics yếu", value: 1 },
-  { metric: "Biến đổi khí hậu", value: 5 },
-  { metric: "Phụ thuộc xuất khẩu thô", value: 3 },
-  { metric: "Biến động thị trường", value: 4 },
+  { metric: "Land subsidence", value: 3 },
+  { metric: "Groundwater depletion", value: 4 },
+  { metric: "Saline intrusion", value: 3 },
+  { metric: "Pollution", value: 2 },
+  { metric: "Labor shortage", value: 4 },
+  { metric: "Weak logistics", value: 5 },
+  { metric: "Climate change", value: 5 },
+  { metric: "Raw material exports", value: 3 },
+  { metric: "Market fluctuations", value: 4 },
 ]
 
 const chartConfig = {
@@ -71,7 +71,7 @@ interface RadarChartProps {
 
 function SingleRadarChart({ data, title, description, footerText, trend }: RadarChartProps) {
   return (
-    <Card className="w-[340px] bg-black text-white">
+    <Card className="w-[320px] bg-black text-white">
       <CardHeader className="items-center pb-2">
         <CardTitle className="text-sm">{title}</CardTitle>
         <CardDescription className="text-xs">{description}</CardDescription>
@@ -87,7 +87,7 @@ function SingleRadarChart({ data, title, description, footerText, trend }: Radar
             <PolarGrid stroke="white" />
             <Radar
               dataKey="value"
-              fill="#90EE90" // Light green for radar fill
+              fill="#60A5FA" 
               fillOpacity={0.6}
             />
           </RadarChart>

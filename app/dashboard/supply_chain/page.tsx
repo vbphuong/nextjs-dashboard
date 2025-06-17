@@ -64,11 +64,11 @@ export default function EnvironmentPage() {
     },
     {
       title: 'Speed of comsunption',
-      description: 'Maximum and Minimum for .',
+      description: 'Maximum and Minimum for Products Consumption.',
     },
     {
-      title: 'Crop Adaptation',
-      description: 'Use climate data to optimize crop planning.',
+      title: 'Transportation Optimization',
+      description: 'Analyze the best road by river way.',
     },
   ];
 
