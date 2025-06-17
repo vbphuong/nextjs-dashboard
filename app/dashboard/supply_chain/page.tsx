@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import ThreeRadarCharts from '@/app/ui/supply_chain/ChartRadarNonagon';
 import { SingleHorizontalBarChart } from '@/app/ui/supply_chain/HorizontalBar';
+import { OptimalRouteVisualization } from '@/app/ui/supply_chain/OptimizedRoute';
 
 // Animation variants for the heading (word-by-word)
 const headingVariants = {
@@ -128,6 +129,9 @@ export default function EnvironmentPage() {
           
           <div className="h-[10vh]" /> {/* 10% height spacer */}
           <SingleHorizontalBarChart />
+
+          <div className="h-[10vh]" /> {/* 10% height spacer */}
+          <OptimalRouteVisualization />
         </div>
       </section>
     </div>
