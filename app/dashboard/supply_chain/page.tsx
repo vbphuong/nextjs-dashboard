@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import ThreeRadarCharts from '@/app/ui/supply_chain/ChartRadarNonagon';
+import ThreeHorizontalBarCharts from '@/app/ui/supply_chain/HorizontalBar';
 
 // Animation variants for the heading (word-by-word)
 const headingVariants = {
@@ -124,6 +125,9 @@ export default function EnvironmentPage() {
             Risks Leading to Supply Shortages 3 months recently
           </motion.h2>
           <ThreeRadarCharts />
+          
+          <div className="h-[10vh]" /> {/* 10% height spacer */}
+          <ThreeHorizontalBarCharts />
         </div>
       </section>
     </div>
