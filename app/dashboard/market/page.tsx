@@ -1,9 +1,15 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import dynamic from 'next/dynamic';
 import { CustomAreaChart } from '@/app/ui/market/CustomAreaChart';
 import { LowCompetitionTable } from '@/app/ui/market/LowCompetitionTable';
-import { CompetitiveProductsMap } from '@/app/ui/market/CompetitiveProductsMap';
+
+// Lazy-load CompetitiveProductsMap với ssr: false
+const CompetitiveProductsMap = dynamic(
+    () => import('@/app/ui/market/CompetitiveProductsMap').then(mod => mod.CompetitiveProductsMap),
+    { ssr: false }
+  );
 
 // Animation variants for the heading (word-by-word)
 const headingVariants = {
@@ -149,7 +155,7 @@ export default function EnvironmentPage() {
           >
             The Density of Hot Products in Market Scale
           </motion.h2>
-          <CompetitiveProductsMap/>
+          <CompetitiveProductsMap />
         </div>
       </section>
     </div>
