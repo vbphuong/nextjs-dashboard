@@ -5,6 +5,7 @@ import dynamic from 'next/dynamic';
 import { CustomAreaChart } from '@/app/ui/market/CustomAreaChart';
 import { LowCompetitionTable } from '@/app/ui/market/LowCompetitionTable';
 import { HighCompetitionTable } from '@/app/ui/market/HighCompetitionTable';
+import { PotentialProductsTable } from '@/app/ui/market/PotentialTable';
 
 // Lazy-load CompetitiveProductsMap với ssr: false
 const CompetitiveProductsMap = dynamic(
@@ -161,7 +162,6 @@ export default function EnvironmentPage() {
           <HighCompetitionTable />
 
           <div className="h-[10vh]" /> {/* 10% height spacer */}
-          <div className="h-[10vh]" /> {/* 10% height spacer */}
           <motion.h2
             className="text-2xl md:text-3xl font-semibold text-center text-blue-200 mb-6"
             initial="hidden"
@@ -171,6 +171,8 @@ export default function EnvironmentPage() {
           >
             Potential Products saw rise in selling in other regions
           </motion.h2>
+            <PotentialProductsTable />
+            <div className="h-[10vh]" /> {/* 10% height spacer */}
         </div>
       </section>
     </div>
