@@ -48,6 +48,11 @@ const products: Product[] = [
 
 export function LowCompetitionTable() {
   const [hoveredProduct, setHoveredProduct] = useState<Product | null>(null)
+  const [mousePosition, setMousePosition] = useState<{ x: number; y: number }>({ x: 0, y: 0 })
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLTableRowElement>) => {
+    setMousePosition({ x: e.pageX, y: e.pageY - 120 }) // Điều chỉnh y để hiển thị phía trên
+  }
 
   return (
     <div className="relative">
@@ -66,7 +71,8 @@ export function LowCompetitionTable() {
           {products.map((product) => (
             <TableRow
               key={product.id}
-              onMouseEnter={() => setHoveredProduct(product)}
+              onMouseEnter={(e) => { setHoveredProduct(product); handleMouseMove(e); }}
+              onMouseMove={handleMouseMove}
               onMouseLeave={() => setHoveredProduct(null)}
             >
               <TableCell className="font-medium text-white">{product.id}</TableCell>
@@ -85,7 +91,10 @@ export function LowCompetitionTable() {
         </TableFooter>
       </Table>
       {hoveredProduct && (
-        <div className="absolute top-0 left-full ml-4 bg-black p-2 rounded shadow-lg z-10">
+        <div
+          className="absolute bg-black p-2 rounded shadow-lg z-10"
+          style={{ top: `${mousePosition.y}px`, left: `${mousePosition.x}px` }}
+        >
           <LineChart width={200} height={100} data={hoveredProduct.trendData} margin={{ top: 5, right: 5, bottom: 5, left: 5 }}>
             <CartesianGrid stroke="#4B5563" vertical={false} />
             <XAxis dataKey="month" tick={{ fill: "#E5E7EB" }} tickLine={false} axisLine={false} interval="preserveStartEnd" />
@@ -100,7 +109,6 @@ export function LowCompetitionTable() {
   )
 }
 
-// Định nghĩa kiểu cho Tooltip
 interface TooltipProps {
   active?: boolean;
   payload?: Array<{ value: number; payload: { month: string; value: number } }>;
