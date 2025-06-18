@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import { CustomAreaChart } from '@/app/ui/market/CustomAreaChart';
 import { LowCompetitionTable } from '@/app/ui/market/LowCompetitionTable';
+import { CompetitiveProductsMap } from '@/app/ui/market/CompetitiveProductsMap';
 
 // Animation variants for the heading (word-by-word)
 const headingVariants = {
@@ -148,6 +149,7 @@ export default function EnvironmentPage() {
           >
             The Density of Hot Products in Market Scale
           </motion.h2>
+          <CompetitiveProductsMap/>
         </div>
       </section>
     </div>
