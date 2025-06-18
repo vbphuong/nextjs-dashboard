@@ -14,8 +14,6 @@ interface ProductLocation {
 export function CompetitiveProductsMap() {
   const [selectedProduct] = useState<ProductLocation | null>(null)
 
-  const mapIframeUrl = "https://www.google.com/maps/d/edit?mid=1IOkkGG0sjErCIIAiCkdwneYmAbXd1-k&usp=sharing"; 
-
   return (
     <div className="bg-black p-4 rounded-lg shadow-lg">
       <h2 className="text-white text-2xl font-bold mb-4">
@@ -25,14 +23,14 @@ export function CompetitiveProductsMap() {
         Analyze products with many sellers in the same category to understand competitive pressures. If any scale has high density of some types of goods, suggestion for changing location or products is needed.
       </p>
       <div className="h-[400px] w-full relative">
-        <iframe
-          src={mapIframeUrl}
-          width="100%"
-          height="100%"
-          style={{ border: 0, borderRadius: "8px" }}
-          allowFullScreen
-          loading="lazy"
-          title="Competitive Products Map"
+      <iframe
+        src="https://www.google.com/maps/d/embed?mid=1IOkkGG0sjErCIIAiCkdwneYmAbXd1-k&ehbc=2E312F"
+        width="640"
+        height="480"
+        style={{ border: 0, borderRadius: "8px" }}
+        allowFullScreen
+        loading="lazy"
+        title="Competitive Products Map"
         ></iframe>
       </div>
       {selectedProduct && (
