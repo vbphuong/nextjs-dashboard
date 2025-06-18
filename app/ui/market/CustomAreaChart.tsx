@@ -17,7 +17,6 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart"
 
-// Dữ liệu biểu đồ cho 12 tháng
 const chartData = [
   { month: "January", units: 120 },
   { month: "February", units: 150 },
@@ -33,14 +32,13 @@ const chartData = [
   { month: "December", units: 130 },
 ]
 
-// Tính giá trị trung bình để hiển thị đường tham chiếu
 const average = chartData.reduce((sum, d) => sum + d.units, 0) / chartData.length;
 
 export function CustomAreaChart() {
   return (
     <Card className="bg-black">
       <CardHeader>
-        <CardTitle className="text-white">Monthly Goods Trade Overview (2025)</CardTitle>
+        <CardTitle className="text-white">Monthly Goods Trade Overview (2024)</CardTitle>
         <CardDescription className="text-gray-300">
           Understanding the rise and fall of goods throughout the year to help local vendors make informed decisions.
         </CardDescription>
@@ -51,6 +49,7 @@ export function CustomAreaChart() {
             accessibilityLayer
             data={chartData}
             margin={{ left: 12, right: 12 }}
+            height={200}
           >
             <CartesianGrid vertical={false} stroke="#4B5563" />
             <XAxis
@@ -73,9 +72,9 @@ export function CustomAreaChart() {
             <Area
               dataKey="units"
               type="natural"
-              fill="#86EFAC"
+              fill="#93C5FD"
               fillOpacity={0.3}
-              stroke="#86EFAC"
+              stroke="#93C5FD"
               strokeWidth={2}
             />
             <ReferenceLine
@@ -96,7 +95,7 @@ export function CustomAreaChart() {
           <div className="grid gap-2">
             <div className="flex items-center gap-2 leading-none font-medium text-white">
               Trending up by 5.2% this month{" "}
-              <TrendingUp className="h-4 w-4 text-green-400" />
+              <TrendingUp className="h-4 w-4 text-blue-400" />
             </div>
             <div className="text-gray-300 flex items-center gap-2 leading-none">
               January - December 2024
