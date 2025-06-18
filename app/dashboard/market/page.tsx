@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { CustomAreaChart } from '@/app/ui/market/CustomAreaChart';
+import { LowCompetitionTable } from '@/app/ui/market/LowCompetitionTable';
 
 // Animation variants for the heading (word-by-word)
 const headingVariants = {
@@ -123,6 +124,18 @@ export default function EnvironmentPage() {
             Trends of Trading Goods in this year
           </motion.h2>
           <CustomAreaChart />
+
+          <div className="h-[10vh]" /> {/* 10% height spacer */}
+          <motion.h2
+            className="text-2xl md:text-3xl font-semibold text-center text-blue-200 mb-6"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+            variants={titleVariants}
+          >
+            Products with Low Competition, not yet traded frequently
+          </motion.h2>
+          <LowCompetitionTable />
         </div>
       </section>
     </div>
