@@ -1,15 +1,6 @@
 "use client"
 
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet"
-import { Icon } from "leaflet"
 import { useState } from "react"
-
-// Định nghĩa icon tùy chỉnh
-const customIcon = new Icon({
-  iconUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png",
-  iconSize: [25, 41],
-  iconAnchor: [12, 41],
-})
 
 interface ProductLocation {
   id: string;
@@ -21,16 +12,18 @@ interface ProductLocation {
 }
 
 const productLocations: ProductLocation[] = [
-  { id: "COMP001", name: "Electronics", category: "Tech", lat: 10.7769, lng: 106.7009, density: 8 },
-  { id: "COMP002", name: "Clothing", category: "Fashion", lat: 10.8231, lng: 106.6297, density: 6 },
-  { id: "COMP003", name: "Groceries", category: "Food", lat: 10.8500, lng: 106.7700, density: 10 },
-  { id: "COMP004", name: "Furniture", category: "Home", lat: 10.8000, lng: 106.7200, density: 4 },
-  { id: "COMP005", name: "Books", category: "Education", lat: 10.7800, lng: 106.6800, density: 7 },
-  { id: "COMP006", name: "Toys", category: "Kids", lat: 10.8300, lng: 106.6500, density: 9 },
+  { id: "COMP001", name: "Electronics", category: "Tech", lat: 10.0304, lng: 105.7823, density: 8 }, // Cần Thơ
+  { id: "COMP002", name: "Clothing", category: "Fashion", lat: 10.3811, lng: 105.4378, density: 6 }, // Long Xuyên
+  { id: "COMP003", name: "Groceries", category: "Food", lat: 10.2533, lng: 105.9733, density: 10 }, // Vĩnh Long
+  { id: "COMP004", name: "Furniture", category: "Home", lat: 10.0126, lng: 105.0829, density: 4 }, // Rạch Giá
+  { id: "COMP005", name: "Books", category: "Education", lat: 9.1767, lng: 105.1500, density: 7 }, // Cà Mau
+  { id: "COMP006", name: "Toys", category: "Kids", lat: 9.6000, lng: 105.9833, density: 9 }, // Sóc Trăng
 ]
 
 export function CompetitiveProductsMap() {
   const [selectedProduct, setSelectedProduct] = useState<ProductLocation | null>(null)
+
+  const mapIframeUrl = "https://www.google.com/maps/d/edit?mid=1IOkkGG0sjErCIIAiCkdwneYmAbXd1-k&usp=sharing"; 
 
   return (
     <div className="bg-black p-4 rounded-lg shadow-lg">
@@ -40,32 +33,16 @@ export function CompetitiveProductsMap() {
       <p className="text-gray-300 mb-4">
         Analyze products with many sellers in the same category to understand competitive pressures. If any scale has high density of some types of goods, suggestion for changing location or products is needed.
       </p>
-      <div className="h-[400px] w-full">
-        <MapContainer center={[10.7769, 106.7009]} zoom={12} style={{ height: "100%", width: "100%", borderRadius: "8px" }}>
-          <TileLayer
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          />
-          {productLocations.map((location) => (
-            <Marker
-              key={location.id}
-              position={[location.lat, location.lng]}
-              icon={customIcon}
-              eventHandlers={{
-                click: () => setSelectedProduct(location),
-              }}
-            >
-              <Popup>
-                <div className="text-black">
-                  <h3 className="font-bold">{location.name}</h3>
-                  <p>Category: {location.category}</p>
-                  <p>Density: {location.density} sellers</p>
-                  {location.density > 7 && <p className="text-red-500">High competition - Consider relocation!</p>}
-                </div>
-              </Popup>
-            </Marker>
-          ))}
-        </MapContainer>
+      <div className="h-[400px] w-full relative">
+        <iframe
+          src={mapIframeUrl}
+          width="100%"
+          height="100%"
+          style={{ border: 0, borderRadius: "8px" }}
+          allowFullScreen
+          loading="lazy"
+          title="Competitive Products Map"
+        ></iframe>
       </div>
       {selectedProduct && (
         <div className="mt-4 text-gray-300">
