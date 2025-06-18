@@ -1,9 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import ThreeRadarCharts from '@/app/ui/supply_chain/ChartRadarNonagon';
-import { SingleHorizontalBarChart } from '@/app/ui/supply_chain/HorizontalBar';
-import { OptimalRouteVisualization } from '@/app/ui/supply_chain/OptimizedRoute';
+import { CustomAreaChart } from '@/app/ui/market/CustomAreaChart';
 
 // Animation variants for the heading (word-by-word)
 const headingVariants = {
@@ -47,30 +45,29 @@ const titleVariants = {
 
 export default function EnvironmentPage() {
   const headingText = [
-    'Optimization',
-    'the',
-    'Supply Chain',
-    'is crucial',
+    'Dive',
+    'into',
+    'Market Trends',
+    'especially',
     'for',
-    'floating',
-    'market',
-    'in',
-    'Mekong',
-    'Delta',
+    'the',
+    'frequency',
+    'of',
+    'Products',
   ];
 
   const cards = [
     {
-      title: 'Reasons for shortage',
-      description: 'Understand the scale for each problems in this region.',
+      title: 'Low-Competition Products',
+      description: 'Products with high demand that have not traded frequently (especially hard-to-make ones).',
     },
     {
-      title: 'Speed of comsunption',
-      description: 'Maximum and Minimum for Products Consumption.',
+      title: 'High-Competition Products',
+      description: 'Identify the hot-selling products and their density in martket scale.',
     },
     {
-      title: 'Transportation Optimization',
-      description: 'Analyze the best road by river way.',
+      title: 'Potential Products',
+      description: 'Some goods are hot outside, but residents in Mekong Delta have not yet like them.',
     },
   ];
 
@@ -83,7 +80,7 @@ export default function EnvironmentPage() {
             <motion.span
               key={index}
               className={
-                word === 'Supply Chain'
+                word === 'Market Trends'
                   ? 'bg-gradient-to-r from-orange-500 via-purple-500 to-blue-500 bg-clip-text text-transparent inline-block mr-2'
                   : 'inline-block mr-2'
               }
@@ -123,33 +120,9 @@ export default function EnvironmentPage() {
             viewport={{ once: true, amount: 0.2 }}
             variants={titleVariants}
           >
-            Risks Leading to Supply Shortages 3 months recently
+            Trends of Trading Goods in this year
           </motion.h2>
-          <ThreeRadarCharts />
-          
-          <div className="h-[10vh]" /> {/* 10% height spacer */}
-          <motion.h2
-            className="text-2xl md:text-3xl font-semibold text-center text-blue-200 mb-6"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
-            variants={titleVariants}
-          >
-            Max and Min Consumption of Popular Products
-          </motion.h2>
-          <SingleHorizontalBarChart />
-
-          <div className="h-[10vh]" /> {/* 10% height spacer */}
-          <motion.h2
-            className="text-2xl md:text-3xl font-semibold text-center text-blue-200 mb-6"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
-            variants={titleVariants}
-          >
-            Suggestion for the Optimal Route for Supply Chain
-          </motion.h2>
-          <OptimalRouteVisualization />
+          <CustomAreaChart />
         </div>
       </section>
     </div>
