@@ -25,8 +25,8 @@ export function CompetitiveProductsMap() {
       <div className="h-[400px] w-full relative">
       <iframe
         src="https://www.google.com/maps/d/embed?mid=1IOkkGG0sjErCIIAiCkdwneYmAbXd1-k&ehbc=2E312F"
-        width="640"
-        height="480"
+        width="100%"
+        height="100%"
         style={{ border: 0, borderRadius: "8px" }}
         allowFullScreen
         loading="lazy"

@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import dynamic from 'next/dynamic';
 import { CustomAreaChart } from '@/app/ui/market/CustomAreaChart';
 import { LowCompetitionTable } from '@/app/ui/market/LowCompetitionTable';
+import { HighCompetitionTable } from '@/app/ui/market/HighCompetitionTable';
 
 // Lazy-load CompetitiveProductsMap với ssr: false
 const CompetitiveProductsMap = dynamic(
@@ -156,6 +157,20 @@ export default function EnvironmentPage() {
             The Density of Hot Products in Market Scale
           </motion.h2>
           <CompetitiveProductsMap />
+
+          <HighCompetitionTable />
+
+          <div className="h-[10vh]" /> {/* 10% height spacer */}
+          <div className="h-[10vh]" /> {/* 10% height spacer */}
+          <motion.h2
+            className="text-2xl md:text-3xl font-semibold text-center text-blue-200 mb-6"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+            variants={titleVariants}
+          >
+            Potential Products saw rise in selling in other regions
+          </motion.h2>
         </div>
       </section>
     </div>
